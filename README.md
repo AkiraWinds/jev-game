@@ -65,37 +65,6 @@ uvicorn jev_game.server:app --reload
 Open http://127.0.0.1:8000 and click "Run next round" to step through the
 pre-generated scenarios.
 
-## Results (v1 / baseline)
-
-Two live runs against real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1` (later
-`gpt-5.6-terra`), `JUDGE_LLM_MODEL=gpt-4.1-mini`), 10 rounds each, played
-through the actual server + judges (not simulated):
-
-| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|
-| v0 — killer's statement just "subtly evasive" (no explicit checkable clue) | 40–50% | 815 ms* | 40–50% | 841 ms* |
-| **v1 — killer's statement contains one fact that contradicts an explicit `key_evidence`** | **100%** | **388 ms** | **100%** | **701 ms** |
-
-\* v0's latency numbers also predate a fix: both judge clients were being
-re-created per round (fresh TCP/TLS handshake each time), which added fixed
-overhead that shrank the visible gap between the two models. v1's numbers
-are measured after switching to one long-lived client per process.
-
-**Takeaways:**
-- v0's "vague vs. confident tone" tell was too soft — both models were only
-  marginally better than the 25% random-guess floor (4 suspects/round).
-- Making the clue a concrete, checkable contradiction (a real "fair play"
-  whodunit clue, not a stylistic hint) took both judges to 100% accuracy on
-  this batch — the puzzle became reliably solvable, which is good for
-  validating the design, but it's now too easy to show an *accuracy*
-  difference between Jev and the LLM judge on this size of case.
-- The **latency** gap held up once measurement overhead was removed: Jev
-  runs roughly 2× faster than the LLM judge per round.
-- Open question for future variants: can a harder case (more characters, a
-  red herring, or a clue that needs two facts combined) create a real
-  accuracy gap between a calibrated `Choice` judge and a chat LLM judge,
-  without regressing to unsolvable-by-either?
-
 ## Results (v2 — red herring)
 
 Branch `experiment/red-herring`: same v1 pipeline, but `case_generator.py`
@@ -103,31 +72,26 @@ now also designs a `red_herring` — a non-killer character is given a
 suspicious-looking but irrelevant detail (a public argument with the
 victim, a secret grudge, a strong motive) that has no bearing on the
 `key_evidence` contradiction, and `generator.py` makes that character raise
-or defend the detail in their own statement. One live run against real APIs
-(`jev-latest`, `GENERATOR_MODEL=gpt-4.1`, `JUDGE_LLM_MODEL=gpt-4.1-mini`),
+or defend the detail in their own statement. One live 3-judge run against
+real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1`,
+`JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`, `JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`),
 10 freshly generated rounds, played through `round_runner.run_round` (not
 simulated):
 
 | Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
 |---|---|---|---|---|---|---|
-| v1 — killer's statement contains one fact that contradicts an explicit `key_evidence` | 100% | 388 ms | — | — | 100% | 701 ms |
-| v2 — v1 + a red herring distracting a non-killer character | 100% | 385 ms | — | — | 100% | 712 ms |
-| **v2 — same case design, 3-judge (`JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`, `JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`)** | **100%** | **403 ms** | **100%** | **700 ms** | **100%** | **857 ms** |
+| **v2 — v1 + a red herring distracting a non-killer character** | **100%** | **403 ms** | **100%** | **700 ms** | **100%** | **857 ms** |
 
 **Takeaways:**
-- Adding a red herring did not create an accuracy gap between Jev and a
-  single LLM judge: both correctly cross-checked every statement against
-  `key_evidence` and ignored the suspicious-but-irrelevant character in all
-  10 rounds. A single distractor detail, isolated to one character's
-  motive/background and echoed in their statement, was not enough to pull
-  either judge off the one real, checkable contradiction.
-- Bringing in a third, smaller judge (SLM, `gpt-5.4-nano-2026-03-17`)
-  didn't separate the judges on this case design either — Jev, SLM, and LLM
-  all hit 100% on the same 10 rounds.
-- The latency ordering held across every run regardless of accuracy: Jev
-  fastest (~385–403 ms), then SLM, then LLM slowest (~700–860 ms) — Jev's
-  ~2× speed advantage over chat-model judges is robust to both case
-  complexity and judge count.
+- Adding a red herring did not create an accuracy gap between any of the
+  three judges: Jev, the SLM, and the LLM all correctly cross-checked every
+  statement against `key_evidence` and ignored the suspicious-but-irrelevant
+  character in all 10 rounds. A single distractor detail, isolated to one
+  character's motive/background and echoed in their statement, was not
+  enough to pull any judge off the one real, checkable contradiction.
+- The latency ordering held regardless of accuracy: Jev fastest (403 ms),
+  then SLM (700 ms), then LLM slowest (857 ms) — Jev's ~2× speed advantage
+  over the LLM judge held up on this harder case design.
 - Still an open question: whether a harder distractor (e.g. a red herring
   that itself weakly conflicts with a *secondary* piece of evidence, or
   multiple red herrings, or requiring two facts to be combined to solve the
