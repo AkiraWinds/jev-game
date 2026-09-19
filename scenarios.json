@@ -478,5 +478,965 @@
       "Sable Ortiz": "At 10:14 p.m., I was on the covered veranda sketching roadmap revisions in view of the night receptionist. I stayed there rather than going near the archive room and never handled its key.",
       "Jonah Pike": "At 10:14 p.m., I was in the dining room on a video call with my investment partners, who witnessed the entire exchange. I remained there throughout and never went to the archive room."
     }
+  },
+  {
+    "id": 11,
+    "title": "The Last Batch",
+    "background": "On the morning after the grand reopening of Hearthstone Bakery, owner Mara Quill is found dead beside the cooling racks, just before the first customers arrive. The cooling room has exactly one key, and that key is held exclusively by the head baker.",
+    "victim": "Mara Quill",
+    "key_evidence": "The cooling room's electronic lock log records a key insertion and the door opening at 5:47 a.m.",
+    "characters": [
+      "Ivo Pell",
+      "Nella Voss",
+      "Tomas Reed",
+      "Sabine Orr"
+    ],
+    "character_info": {
+      "Ivo Pell": {
+        "role": "Head baker; claims he was decorating pastries at the front counter at 5:47 a.m.",
+        "relationship_to_victim": "Employee and longtime prot\u00e9g\u00e9",
+        "motive": "Mara had discovered that Ivo was stealing expensive ingredients and planned to dismiss him."
+      },
+      "Nella Voss": {
+        "role": "Pastry decorator",
+        "relationship_to_victim": "Former business partner",
+        "motive": "Mara had taken sole credit for Nella's signature reopening menu."
+      },
+      "Tomas Reed": {
+        "role": "Dawn delivery driver",
+        "relationship_to_victim": "Supplier and creditor",
+        "motive": "Mara had delayed payment on several large flour deliveries."
+      },
+      "Sabine Orr": {
+        "role": "Local food columnist",
+        "relationship_to_victim": "Public rival",
+        "motive": "Mara had threatened to expose Sabine's fabricated restaurant reviews."
+      }
+    },
+    "killer": "Ivo Pell",
+    "timeline": {
+      "Ivo Pell": "At 5:47 a.m., Ivo Pell was in the cooling room, used his key to enter, and killed Mara Quill beside the racks.",
+      "Nella Voss": "At 5:47 a.m., Nella Voss was at the front counter piping icing onto reopening cupcakes.",
+      "Tomas Reed": "At 5:47 a.m., Tomas Reed was unloading flour sacks at the bakery's rear receiving bay.",
+      "Sabine Orr": "At 5:47 a.m., Sabine Orr was seated in the window alcove, recording notes for her review."
+    },
+    "statements": {
+      "Ivo Pell": "At 5:47 a.m., I was decorating pastries at the front counter rather than inserting my key and opening the cooling-room door. I was focused on the reopening preparations and expected the morning work to proceed normally.",
+      "Nella Voss": "At 5:47 a.m., I was at the front counter piping icing onto the reopening cupcakes, with the decorating work in full progress. I resented Mara taking credit for my menu, but I remained at that station then.",
+      "Tomas Reed": "At 5:47 a.m., I was unloading flour sacks at the bakery's rear receiving bay while preparing the delivery for the day's baking. Mara's unpaid invoices frustrated me, but I was still handling the shipment outside.",
+      "Sabine Orr": "At 5:47 a.m., I was seated in the window alcove recording notes for my review as the bakery prepared to open. Mara's threat to expose my reviews angered me, but I stayed there documenting the reopening."
+    }
+  },
+  {
+    "id": 12,
+    "title": "The Lake House Latch",
+    "background": "During an uneasy family reunion at the weathered Veylan Lake House, patriarch Orson Veylan is found dead in his study at 10:30 p.m., shortly after announcing that he would change his will. The study has exactly one entrance: a single door opening onto the upstairs hall.",
+    "victim": "Orson Veylan",
+    "key_evidence": "At 10:14 p.m., the study door's contact sensor recorded one complete open-and-close cycle.",
+    "characters": [
+      "Mara Veylan",
+      "Calder Veylan",
+      "Iris Pell",
+      "Jonah Rusk"
+    ],
+    "character_info": {
+      "Mara Veylan": {
+        "role": "Orson's eldest daughter and caretaker of the lake house",
+        "relationship_to_victim": "Daughter",
+        "motive": "Orson planned to sell the house, leaving Mara without the home and inheritance she had sacrificed to maintain."
+      },
+      "Calder Veylan": {
+        "role": "Orson's estranged son and an indebted boat dealer",
+        "relationship_to_victim": "Son",
+        "motive": "Orson had refused to cover Calder's mounting debts and intended to disinherit him."
+      },
+      "Iris Pell": {
+        "role": "Family archivist who prepared Orson's legal papers",
+        "relationship_to_victim": "Niece by marriage",
+        "motive": "Orson discovered Iris had forged provenance records for several valuable family heirlooms."
+      },
+      "Jonah Rusk": {
+        "role": "The lake house's longtime groundskeeper",
+        "relationship_to_victim": "Former employee and trusted family friend",
+        "motive": "Orson had decided to dismiss Jonah and replace him with a commercial property crew."
+      }
+    },
+    "killer": "Calder Veylan",
+    "timeline": {
+      "Mara Veylan": "At 10:14 p.m., Mara was in the downstairs pantry labeling preserves for the morning breakfast.",
+      "Calder Veylan": "At 10:14 p.m., Calder was actually in Orson's study striking him with a brass bookend, though he later claimed he was in the lakeside kitchen washing a wineglass.",
+      "Iris Pell": "At 10:14 p.m., Iris was in the guest bedroom sorting Orson's correspondence into labeled folders.",
+      "Jonah Rusk": "At 10:14 p.m., Jonah was on the back porch repairing the loose latch on a fishing-tackle cabinet."
+    },
+    "statements": {
+      "Mara Veylan": "At 10:14 p.m., I was downstairs in the pantry, labeling preserves for breakfast and nowhere near the upstairs hall. Orson\u2019s threat to sell the house had left me frightened, but I kept working.",
+      "Calder Veylan": "The announcement left everyone unsettled, and I spent the rest of the evening quietly avoiding the family argument. At 10:14 p.m., the study door was closed.",
+      "Iris Pell": "At 10:14 p.m., I was in the guest bedroom, sorting Orson\u2019s correspondence into labeled folders. I was anxious about the legal papers, yet I stayed there and did not enter the upstairs hall.",
+      "Jonah Rusk": "At 10:14 p.m., I was on the back porch repairing the loose latch on the fishing-tackle cabinet. Orson\u2019s plan to replace me troubled me, but I remained outside and focused on the repair."
+    }
+  },
+  {
+    "id": 13,
+    "title": "The Last Rise",
+    "background": "Brackenridge Bakery celebrated its grand reopening at dawn, but owner Celia Rusk was found dead at 5:50 a.m. in the locked flour archive, with a brass dough scraper beside her. A preliminary examination places her death at approximately 5:42 a.m. The archive has exactly one entrance, and its lock accepts only the night manager's personal key.",
+    "victim": "Celia Rusk",
+    "key_evidence": "The archive lock's audit chip records a key turn at exactly 5:42 a.m.",
+    "characters": [
+      "Mara Venn",
+      "Ivo Pell",
+      "Nessa Quill",
+      "Tobin Wray"
+    ],
+    "character_info": {
+      "Mara Venn": {
+        "role": "Night manager who claims she remained at the front counter from 5:35 to 5:50 a.m.",
+        "relationship_to_victim": "Celia's longtime employee and trusted operations manager",
+        "motive": "Celia discovered Mara had been diverting small cash deposits and planned to dismiss her after the reopening."
+      },
+      "Ivo Pell": {
+        "role": "Head baker",
+        "relationship_to_victim": "Celia's former apprentice and current business partner",
+        "motive": "He resented Celia's decision to replace his recipes with cheaper commercial mixes."
+      },
+      "Nessa Quill": {
+        "role": "Pastry chef",
+        "relationship_to_victim": "Celia's niece",
+        "motive": "Celia had cut Nessa from the bakery's ownership agreement after an argument over money."
+      },
+      "Tobin Wray": {
+        "role": "Morning delivery driver",
+        "relationship_to_victim": "A supplier who had worked with Celia for six years",
+        "motive": "Celia threatened to cancel his contract after discovering repeated short deliveries."
+      }
+    },
+    "killer": "Mara Venn",
+    "timeline": {
+      "Mara Venn": "At 5:42 a.m. in the flour archive, Mara used her personal key, struck Celia with the brass dough scraper, and left her there.",
+      "Ivo Pell": "At 5:42 a.m. in the rear loading bay, Ivo signed for a flour shipment and checked its sealed pallets.",
+      "Nessa Quill": "At 5:42 a.m. in the oven room, Nessa reset the proofing timers and loaded the first trays of morning rolls.",
+      "Tobin Wray": "At 5:42 a.m. on the public sidewalk outside the bakery, Tobin was securing empty delivery crates to his van."
+    },
+    "statements": {
+      "Mara Venn": "I remained at the front counter throughout the rush, from 5:35 until 5:50. I turned my personal key in the flour archive at 5:41.",
+      "Ivo Pell": "I was in the rear loading bay at 5:42, signing for the flour shipment. I checked each sealed pallet before directing it into the bakery.",
+      "Nessa Quill": "I was in the oven room at 5:42, resetting the proofing timers. I loaded the first trays of morning rolls for the reopening.",
+      "Tobin Wray": "I was on the public sidewalk at 5:42, securing empty delivery crates to my van. I finished tying them down before carrying the paperwork inside."
+    }
+  },
+  {
+    "id": 14,
+    "title": "The Locked Archive",
+    "background": "During the opening night of the Veyra Gallery, following a staged-looking break-in at a display case, gallery owner Elias Quill was found dead at 9:55 p.m. in the private archive by a junior attendant. The archive's sole entrance is controlled by a keycard issued exclusively to the gallery registrar.",
+    "victim": "Elias Quill",
+    "key_evidence": "At 9:42 p.m., the archive lock recorded an authorized keycard entry, followed by the door relocking at 9:43 p.m.",
+    "characters": [
+      "Mara Sol",
+      "Jun Orra",
+      "Tessa Vale",
+      "Oren Pike"
+    ],
+    "character_info": {
+      "Mara Sol": {
+        "role": "gallery registrar",
+        "relationship_to_victim": "Elias's trusted administrator",
+        "motive": "Elias had discovered that Mara was replacing authentic provenance records with forged ones; she claims she was cataloguing invitations in the front foyer from 9:35 to 9:50 p.m."
+      },
+      "Jun Orra": {
+        "role": "night security guard",
+        "relationship_to_victim": "Elias's longtime security chief",
+        "motive": "Elias planned to dismiss Jun after blaming him for the display-case break-in."
+      },
+      "Tessa Vale": {
+        "role": "featured painter",
+        "relationship_to_victim": "Elias's newest star artist",
+        "motive": "Elias threatened to cancel Tessa's exhibition after learning she had secretly sold a promised painting to a rival collector."
+      },
+      "Oren Pike": {
+        "role": "principal donor",
+        "relationship_to_victim": "Elias's largest financial backer",
+        "motive": "Elias intended to reveal that Oren had diverted restoration funds into a private investment."
+      }
+    },
+    "killer": "Mara Sol",
+    "timeline": {
+      "Mara Sol": "At 9:42 p.m. in the private archive, Mara struck Elias with a bronze catalog stand, removed the forged provenance files, and staged the nearby break-in before leaving.",
+      "Jun Orra": "At 9:42 p.m. in the loading bay, Jun was checking the rear delivery doors after the alarm from the display case sounded.",
+      "Tessa Vale": "At 9:42 p.m. in the sculpture hall, Tessa was speaking with three visiting critics beside her installation.",
+      "Oren Pike": "At 9:42 p.m. on the roof terrace, Oren was taking a private phone call with his financial adviser."
+    },
+    "statements": {
+      "Mara Sol": "At 9:42 p.m., I was in the front foyer cataloguing invitations, not in the private archive. I was occupied with routine opening-night administration, and my attention never turned toward the archive.",
+      "Jun Orra": "At 9:42 p.m., I was in the loading bay checking the rear delivery doors after the display-case alarm sounded. The delivery entrance and alarm panel held my attention while the gallery staff continued handling the opening-night crowd.",
+      "Tessa Vale": "At 9:42 p.m., I was in the sculpture hall speaking with three visiting critics beside my installation. Their questions concerned the paintings and exhibition, and I remained with them throughout that discussion.",
+      "Oren Pike": "At 9:42 p.m., I was on the roof terrace taking a private phone call with my financial adviser. We discussed investment matters while I remained apart from the gallery's interior activity."
+    }
+  },
+  {
+    "id": 15,
+    "title": "The Locked Gallery",
+    "background": "At the opening night of the Larkspur Gallery, a staged break-in leaves renowned appraiser Celia Voss dead in the restoration vault, discovered at 10:18 p.m. beneath a torn canvas. The vault can be opened only by the single brass key carried by the gallery's night conservator. Rain and scattered glass make the gallery appear to have been entered from outside.",
+    "victim": "Celia Voss",
+    "key_evidence": "At 9:42 p.m., the vault's electronic lock register recorded a valid key turn, followed by five minutes with the door open before it was relocked.",
+    "characters": [
+      "Mara Quill",
+      "Jonas Reed",
+      "Priya Nand",
+      "Elias Wren"
+    ],
+    "character_info": {
+      "Mara Quill": {
+        "role": "Night conservator",
+        "relationship_to_victim": "Celia's subordinate and keeper of the restoration vault",
+        "motive": "Celia had discovered Mara was replacing authentic pigments with cheaper substitutes and planned to expose her after the opening."
+      },
+      "Jonas Reed": {
+        "role": "Gallery owner",
+        "relationship_to_victim": "Celia's longtime business partner",
+        "motive": "Celia intended to withdraw from their partnership and reveal that Jonas had insured several paintings for more than their value."
+      },
+      "Priya Nand": {
+        "role": "Featured painter",
+        "relationship_to_victim": "Celia was her dealer and public champion",
+        "motive": "Celia had threatened to cancel Priya's exhibition after discovering that several signature works were not entirely her own."
+      },
+      "Elias Wren": {
+        "role": "Security consultant",
+        "relationship_to_victim": "Celia had hired him to assess the gallery's insurance security",
+        "motive": "Celia had found evidence that Elias secretly sold alarm weaknesses to art thieves."
+      }
+    },
+    "killer": "Mara Quill",
+    "timeline": {
+      "Mara Quill": "At 9:42 p.m. in the restoration vault, Mara struck Celia with a bronze stretching tool and staged the break-in before relocking the door; she later claimed she had remained in the loading bay from 9:35 to 9:55 p.m.",
+      "Jonas Reed": "At 9:42 p.m. in the champagne alcove, Jonas was arguing with an insurance broker about the gallery's coverage.",
+      "Priya Nand": "At 9:42 p.m. on the mezzanine, Priya was signing catalogs for visiting patrons.",
+      "Elias Wren": "At 9:42 p.m. beside the front security desk, Elias was replacing a faulty camera battery while speaking with the doorman."
+    },
+    "statements": {
+      "Mara Quill": "At 9:42 p.m., the vault was still locked, and I was handling routine conservator work in the loading bay. I remained at my assigned duties through the opening and never spoke with Celia that evening.",
+      "Jonas Reed": "At 9:42 p.m., I was in the champagne alcove arguing with an insurance broker about the gallery\u2019s coverage. I stayed there through the opening and had no private conversation with Celia that evening.",
+      "Priya Nand": "At 9:42 p.m., I was on the mezzanine signing catalogs for visiting patrons and answering questions about my exhibition. I remained with the guests through the opening and did not meet privately with Celia that evening.",
+      "Elias Wren": "At 9:42 p.m., I was beside the front security desk replacing a faulty camera battery while speaking with the doorman. I stayed near the entrance through the opening and had no private contact with Celia that evening."
+    }
+  },
+  {
+    "id": 16,
+    "title": "The Last Access",
+    "background": "At a lakeside lodge, the employees of fledgling startup Brightloop gather for an all-hands retreat when founder Mara Quill is found dead in the generator control room. Her body is discovered shortly after the evening power demonstration, with a wrench beside her and the room's monitoring console still running. The control room can be entered only through its single locked door, and the only physical key is held by the lodge facilities coordinator.",
+    "victim": "Mara Quill",
+    "key_evidence": "The control-room lock audit records the door being opened at 10:18 p.m. and secured again at 10:31 p.m.",
+    "characters": [
+      "Rowan Vale",
+      "Tessa Nwosu",
+      "Eli Mercer",
+      "Juniper Shaw"
+    ],
+    "character_info": {
+      "Rowan Vale": {
+        "role": "Lodge facilities coordinator",
+        "relationship_to_victim": "Had been hired by Mara to oversee the retreat's equipment and maintenance",
+        "motive": "Mara discovered Rowan had been diverting lodge repair funds; Rowan claimed to have been in the dining hall from 10:10 to 10:35 p.m."
+      },
+      "Tessa Nwosu": {
+        "role": "Brightloop product designer",
+        "relationship_to_victim": "Mara was her demanding founder and former mentor",
+        "motive": "Mara planned to remove Tessa from the product team after a disastrous prototype review"
+      },
+      "Eli Mercer": {
+        "role": "Brightloop finance lead",
+        "relationship_to_victim": "Managed the company accounts and reported directly to Mara",
+        "motive": "Mara had found irregular reimbursements that could expose Eli's gambling debts"
+      },
+      "Juniper Shaw": {
+        "role": "Brightloop community manager",
+        "relationship_to_victim": "Mara's longtime friend and first employee",
+        "motive": "Mara intended to sell the company without honoring Juniper's promised share"
+      }
+    },
+    "killer": "Rowan Vale",
+    "timeline": {
+      "Rowan Vale": "At 10:24 p.m., Rowan was inside the generator control room, struck Mara with the maintenance wrench, and left after resetting the monitoring console.",
+      "Tessa Nwosu": "At 10:24 p.m., Tessa was on the lakeside deck photographing the retreat's lantern display for the company newsletter.",
+      "Eli Mercer": "At 10:24 p.m., Eli was in the dining hall reconciling receipts with the catering supervisor.",
+      "Juniper Shaw": "At 10:24 p.m., Juniper was in the recreation cabin leading a video call with Brightloop's remote employees."
+    },
+    "statements": {
+      "Rowan Vale": "At 10:24 p.m., the control-room door remained locked throughout the evening, with no opening between 10:00 and 10:40. I was handling ordinary facilities matters and had no reason to interfere with the demonstration.",
+      "Tessa Nwosu": "At 10:24 p.m., I was on the lakeside deck photographing the lantern display for Brightloop's newsletter. I stayed focused on the retreat coverage and had no reason to enter the control room.",
+      "Eli Mercer": "At 10:24 p.m., I was in the dining hall reconciling receipts with the catering supervisor. We were reviewing the evening charges together, and I had no reason to visit the control room.",
+      "Juniper Shaw": "At 10:24 p.m., I was in the recreation cabin leading a video call with Brightloop's remote employees. I remained engaged with the group throughout the call and had no reason to enter the control room."
+    }
+  },
+  {
+    "id": 17,
+    "title": "The Locked Gallery",
+    "background": "During the opening night of the Vespera Gallery, a shattered display case suggests a break-in amid the crowded celebration. Curator Elian Rusk was found dead in the restoration vault at 9:50 p.m., and a preliminary examination places his death between 9:42 and 9:48 p.m. The vault can be entered only through one locked door, whose sole key is kept by the gallery's head of security.",
+    "victim": "Elian Rusk",
+    "key_evidence": "The electronic latch log shows that the restoration-vault door opened at 9:43 p.m. and closed at 9:47 p.m.",
+    "characters": [
+      "Mara Quill",
+      "Tavian Sorel",
+      "Nera Vale",
+      "Orrin Pell"
+    ],
+    "character_info": {
+      "Mara Quill": {
+        "role": "Head of gallery security, publicly claiming she remained at the lobby desk throughout the critical interval",
+        "relationship_to_victim": "Rusk's direct supervisor",
+        "motive": "Rusk had discovered that Mara was selling private details about the gallery's security systems."
+      },
+      "Tavian Sorel": {
+        "role": "Featured painter, publicly claiming he was sketching on the rooftop terrace",
+        "relationship_to_victim": "An artist whose exhibition Rusk curated",
+        "motive": "Rusk intended to remove Tavian's paintings after finding evidence that several were copied."
+      },
+      "Nera Vale": {
+        "role": "Principal donor, publicly claiming she stayed in the east gallery",
+        "relationship_to_victim": "The gallery's largest financial patron",
+        "motive": "Rusk threatened to expose her diversion of restoration funds."
+      },
+      "Orrin Pell": {
+        "role": "Conservator, publicly claiming he was repairing a shipping crate at the loading dock",
+        "relationship_to_victim": "A longtime colleague who handled Rusk's restoration projects",
+        "motive": "Rusk planned to dismiss Orrin for concealing damage to a priceless sculpture."
+      }
+    },
+    "killer": "Mara Quill",
+    "timeline": {
+      "Mara Quill": "At 9:44 p.m., Mara was inside the restoration vault, having entered with the sole key, and killed Elian Rusk before leaving the door to relock behind her.",
+      "Tavian Sorel": "At 9:44 p.m., Tavian was on the rooftop terrace, sketching the illuminated city skyline.",
+      "Nera Vale": "At 9:44 p.m., Nera was in the east gallery, examining a bronze triptych beneath the main chandelier.",
+      "Orrin Pell": "At 9:44 p.m., Orrin was at the loading dock, tightening the metal bands around a damaged shipping crate."
+    },
+    "statements": {
+      "Mara Quill": "At 9:44 p.m., I was stationed at the lobby desk, overseeing the opening-night crowd. I remained focused on the public entrance while the celebration continued around me.",
+      "Tavian Sorel": "At 9:44 p.m., I was on the rooftop terrace, sketching the illuminated skyline above the gallery. I stayed there with my drawing materials while the opening-night crowd gathered below.",
+      "Nera Vale": "At 9:44 p.m., I was in the east gallery, examining a bronze triptych beneath the main chandelier. I remained among the displays while guests moved through the reception nearby.",
+      "Orrin Pell": "At 9:44 p.m., I was at the loading dock, tightening the metal bands around a damaged shipping crate. I stayed with the shipment and its repair work while the gallery celebration carried on inside."
+    }
+  },
+  {
+    "id": 18,
+    "title": "Murder on the Serein Belle",
+    "background": "During a gala fundraiser aboard the river cruise ship Serein Belle, philanthropist Liora Venn is found dead in the chart room just after the vessel passes beneath the old stone bridge. She has been struck with a brass sounding weight, and the room has been disturbed as though someone searched it. Only the chief purser holds the key that can unlock the chart room.",
+    "victim": "Liora Venn",
+    "key_evidence": "At 10:18 p.m., the ship's access system records a key-authenticated unlock of the chart room.",
+    "characters": [
+      "Arden Quill",
+      "Mara Vey",
+      "Jonas Pell",
+      "Celeste Rook"
+    ],
+    "character_info": {
+      "Arden Quill": {
+        "role": "Chief purser, who claims he remained at the ballroom dais from 10:00 to 10:30 p.m.",
+        "relationship_to_victim": "Managed the ship's accounts for Liora's foundation.",
+        "motive": "Liora had discovered that Arden was diverting small donations into a private account."
+      },
+      "Mara Vey": {
+        "role": "Gala auctioneer",
+        "relationship_to_victim": "Former business partner and longtime rival.",
+        "motive": "Liora had threatened to expose Mara's fraudulent charity-auction records."
+      },
+      "Jonas Pell": {
+        "role": "Shipboard engineer",
+        "relationship_to_victim": "Liora's estranged nephew.",
+        "motive": "Liora had recently removed him from her will after he demanded money."
+      },
+      "Celeste Rook": {
+        "role": "Foundation solicitor",
+        "relationship_to_victim": "Handled Liora's legal affairs and trusts.",
+        "motive": "Liora planned to dismiss Celeste for concealing a damaging clause in a donor contract."
+      }
+    },
+    "killer": "Arden Quill",
+    "timeline": {
+      "Arden Quill": "At 10:18 p.m. in the chart room, Arden unlocked the door, killed Liora with the brass sounding weight, and searched the desk for the donation ledger.",
+      "Mara Vey": "At 10:18 p.m. on the forward observation deck, Mara was photographing the bridge lights for the auction presentation.",
+      "Jonas Pell": "At 10:18 p.m. in the engine control room, Jonas was resetting a faulty pressure sensor under the second engineer's supervision.",
+      "Celeste Rook": "At 10:18 p.m. in the main ballroom, Celeste was helping a donor complete a pledge card beside the orchestra."
+    },
+    "statements": {
+      "Arden Quill": "I was occupied with the gala's financial arrangements and had every reason to remain with the ballroom proceedings. At 10:18 p.m., the access record shows no key-authenticated unlock of the chart room.",
+      "Mara Vey": "At 10:18 p.m., I was on the forward observation deck photographing the bridge lights for my auction presentation. I remained there throughout that moment, well away from the chart room and its locked door.",
+      "Jonas Pell": "At 10:18 p.m., I was in the engine control room resetting a faulty pressure sensor under the second engineer's supervision. The repair kept me below deck and nowhere near the chart room while the bridge came into view.",
+      "Celeste Rook": "At 10:18 p.m., I was in the main ballroom helping a donor complete a pledge card beside the orchestra. I stayed with that donor through the exchange, with no opportunity to reach the chart room."
+    }
+  },
+  {
+    "id": 19,
+    "title": "The Afterimage Murder",
+    "background": "During the opening night of the Bellwether Gallery, a break-in leaves a shattered display and a missing landscape, while gallery owner Orin Pell is found dead in the restoration room at 10:05 p.m. The restoration room has exactly one door, opening onto the main gallery. A night guard discovers the body after the gallery is sealed for the police.",
+    "victim": "Orin Pell",
+    "key_evidence": "The restoration room's electronic door sensor recorded openings at 9:42 p.m. and 9:55 p.m., with no other opening before the body was discovered at 10:05 p.m.",
+    "characters": [
+      "Mara Venn",
+      "Ivo Sable",
+      "Lena Quist",
+      "Tomas Rell"
+    ],
+    "character_info": {
+      "Mara Venn": {
+        "role": "Gallery registrar who claims she entered the restoration room at 9:50 p.m. to inspect the damage",
+        "relationship_to_victim": "Orin's trusted registrar and longtime employee",
+        "motive": "Orin had discovered that she was secretly selling forged provenance documents."
+      },
+      "Ivo Sable": {
+        "role": "Private security consultant hired for the opening",
+        "relationship_to_victim": "Orin's former business partner",
+        "motive": "Orin planned to expose Ivo for inflating security invoices and pocketing the difference."
+      },
+      "Lena Quist": {
+        "role": "Featured painter at the exhibition",
+        "relationship_to_victim": "Orin was her dealer and controlled her most valuable contracts",
+        "motive": "Orin threatened to cancel her show after learning she had altered several paintings."
+      },
+      "Tomas Rell": {
+        "role": "Art courier responsible for the evening's deliveries",
+        "relationship_to_victim": "Orin owed him six months of unpaid transport fees",
+        "motive": "Orin had blamed Tomas for the break-in and intended to report him to the police."
+      }
+    },
+    "killer": "Mara Venn",
+    "timeline": {
+      "Mara Venn": "At 9:42 p.m. Mara entered the restoration room, killed Orin at 9:50 p.m., and left through its door at 9:55 p.m.",
+      "Ivo Sable": "At 9:50 p.m. Ivo was at the security desk in the main lobby, reviewing the exterior camera feeds.",
+      "Lena Quist": "At 9:50 p.m. Lena was in the west courtyard, arguing with a journalist beside the fountain.",
+      "Tomas Rell": "At 9:50 p.m. Tomas was at the loading dock, photographing the damaged rear gate for the insurance report."
+    },
+    "statements": {
+      "Mara Venn": "At 9:50 p.m., I entered the restoration room to inspect the shattered display. I checked the damage briefly and then returned to my registrar duties in the main gallery.",
+      "Ivo Sable": "At 9:50 p.m., I was at the security desk in the main lobby reviewing the exterior camera feeds. The desk log and those screens kept me there while the restoration room door was being used.",
+      "Lena Quist": "At 9:50 p.m., I was in the west courtyard arguing with a journalist beside the fountain. The journalist remained with me throughout the exchange and can place me away from the restoration room.",
+      "Tomas Rell": "At 9:50 p.m., I was at the loading dock photographing the damaged rear gate for the insurance report. The timestamped photographs and the dock crew records place me there during the relevant interval."
+    }
+  },
+  {
+    "id": 20,
+    "title": "The Brass Key",
+    "background": "During the opening night of the Calder House Gallery, a staged break-in leaves the staff scrambling among damaged canvases and scattered tools. Gallery owner Ivo Marrec is found dead at 9:40 p.m. inside the sealed display vault, beside a missing miniature. Only the night curator holds the vault's brass key.",
+    "victim": "Ivo Marrec",
+    "key_evidence": "At 9:18 p.m., the vault key's mechanical usage counter recorded one insertion and withdrawal.",
+    "characters": [
+      "Mara Venn",
+      "Jonas Pell",
+      "Selene Orr",
+      "Tomas Rusk"
+    ],
+    "character_info": {
+      "Mara Venn": {
+        "role": "night curator",
+        "relationship_to_victim": "Ivo's trusted curator and former prot\u00e9g\u00e9",
+        "motive": "Ivo discovered she had been secretly replacing valuable works with convincing replicas."
+      },
+      "Jonas Pell": {
+        "role": "security consultant",
+        "relationship_to_victim": "The contractor hired by Ivo after the gallery's earlier theft",
+        "motive": "Ivo planned to expose Jonas for exaggerating security threats to obtain lucrative contracts."
+      },
+      "Selene Orr": {
+        "role": "featured painter",
+        "relationship_to_victim": "Ivo represented her and controlled the sale of her work",
+        "motive": "Ivo intended to cancel her contract after learning she had forged part of her acclaimed series."
+      },
+      "Tomas Rusk": {
+        "role": "gallery technician",
+        "relationship_to_victim": "The employee responsible for lighting and installation",
+        "motive": "Ivo was about to dismiss Tomas and report his theft of specialized gallery equipment."
+      }
+    },
+    "killer": "Mara Venn",
+    "timeline": {
+      "Mara Venn": "At 9:18 p.m. in the display vault, Mara used the brass key and struck Ivo with a bronze plinth weight, though she later claimed she was alone in the projection booth from 9:05 to 9:30.",
+      "Jonas Pell": "At 9:18 p.m. on the east gallery balcony, Jonas was repairing a disabled motion sensor while speaking with a visiting electrician.",
+      "Selene Orr": "At 9:18 p.m. in the west gallery, Selene was giving an impromptu interview beside her largest painting to a local arts reporter.",
+      "Tomas Rusk": "At 9:18 p.m. in the loading bay, Tomas was replacing a blown fuse in the exterior lighting panel under the watch of the delivery driver."
+    },
+    "statements": {
+      "Mara Venn": "I was in the projection booth from 9:05 until 9:30, reviewing the opening-night reels and speaking with the projectionist. When I checked the vault's mechanical counter afterward, it showed no key insertion or withdrawal at 9:18.",
+      "Jonas Pell": "At 9:18, I was on the east gallery balcony repairing a disabled motion sensor while the visiting electrician held my work light. He remained beside me throughout the repair and can confirm I never entered the display vault.",
+      "Selene Orr": "At 9:18, I was in the west gallery beside my largest painting, giving an impromptu interview to a local arts reporter. The reporter had her recorder running, and I stayed there answering questions until the commotion began.",
+      "Tomas Rusk": "At 9:18, I was in the loading bay replacing a blown fuse in the exterior lighting panel while the delivery driver watched. I remained at the panel until the exterior lights came back on, and he saw me there the entire time."
+    }
+  },
+  {
+    "id": 21,
+    "title": "Murder at the Midnight Bend",
+    "background": "During a charity gala aboard the river cruise ship Morrowglass, philanthropic cartographer Oren Vale was found dead in the private chart room shortly after the vessel passed the old stone locks. The chart room has exactly one entrance, a locked door from the promenade, and its sole key is carried by the ship's archivist. Oren was discovered at 10:34 p.m., and the ship's doctor places his death at approximately 10:17 p.m.",
+    "victim": "Oren Vale",
+    "key_evidence": "The chart-room lock's audit module recorded the door being opened with its physical key at exactly 10:17 p.m.",
+    "characters": [
+      "Mara Quill",
+      "Davin Rusk",
+      "Sela Venn",
+      "Jonis Pell"
+    ],
+    "character_info": {
+      "Mara Quill": {
+        "role": "Ship archivist",
+        "relationship_to_victim": "Oren had threatened to expose her forged provenance records.",
+        "motive": "She claims she remained in the gala ballroom from 10:00 to 10:30 p.m., though Oren had recently discovered her falsifications."
+      },
+      "Davin Rusk": {
+        "role": "Caterer and former business partner",
+        "relationship_to_victim": "Oren left him bankrupt after dissolving their expedition company.",
+        "motive": "He wanted repayment and feared Oren would ruin his new catering contract."
+      },
+      "Sela Venn": {
+        "role": "River conservation campaigner",
+        "relationship_to_victim": "Oren had withdrawn funding from her floodplain restoration project.",
+        "motive": "She believed Oren's public charity work concealed destructive private land deals."
+      },
+      "Jonis Pell": {
+        "role": "\u8239's pianist",
+        "relationship_to_victim": "Oren was his estranged uncle and had recently cut him out of a trust.",
+        "motive": "He needed the inheritance to settle mounting gambling debts."
+      }
+    },
+    "killer": "Mara Quill",
+    "timeline": {
+      "Mara Quill": "At 10:17 p.m., she was in the chart room, where she struck Oren with a brass compass and then returned to the promenade.",
+      "Davin Rusk": "At 10:17 p.m., he was in the galley loading dessert plates onto a service cart.",
+      "Sela Venn": "At 10:17 p.m., she was on the aft observation deck speaking with the ship's captain about the riverbank restoration appeal.",
+      "Jonis Pell": "At 10:17 p.m., he was at the ballroom piano playing the second movement of the gala's scheduled quartet."
+    },
+    "statements": {
+      "Mara Quill": "At 10:17 p.m., I was in the ballroom reviewing the gala's provenance display among the guests. Oren's accusations had made our dealings tense, but I kept my attention on the evening's public program.",
+      "Davin Rusk": "At 10:17 p.m., I was in the galley loading dessert plates onto my service cart, with the pastry crew nearby. I had been preparing the next course rather than visiting the chart room, despite my bitter history with Oren.",
+      "Sela Venn": "At 10:17 p.m., I was on the aft observation deck speaking with the captain about the floodplain restoration appeal, with the riverbank lights behind us. My dispute with Oren concerned his funding decisions, but I was discussing the campaign rather than seeking him out.",
+      "Jonis Pell": "At 10:17 p.m., I was at the ballroom piano playing the second movement of the scheduled quartet, while the gala guests listened nearby. Oren's decision to cut me from his trust had angered me, but I remained at the instrument throughout the performance."
+    }
+  },
+  {
+    "id": 22,
+    "title": "Murder Below Deck",
+    "background": "During a glittering charity gala aboard the river cruise ship Celestine, shipping magnate Oren Vale is found dead in the private chart room. His body is discovered shortly after the ship passes beneath the old Stonebridge, with a silver letter opener embedded in his chest. The chart room has exactly one entrance, a locked door whose sole key is held by the ship's purser.",
+    "victim": "Oren Vale",
+    "key_evidence": "The chart room's lock recorded an opening at 9:44 p.m., a timestamp that falls within the medical examiner's estimated death interval of 9:42 to 9:46 p.m.",
+    "characters": [
+      "Mara Quill",
+      "Tavian Rusk",
+      "Liora Sen",
+      "Bram Hallow"
+    ],
+    "character_info": {
+      "Mara Quill": {
+        "role": "Ship's purser; claims she remained in the ballroom throughout the critical period",
+        "relationship_to_victim": "Vale's longtime business associate and the officer responsible for the ship's keys",
+        "motive": "Vale had discovered that she was diverting small sums from the ship's charitable accounts."
+      },
+      "Tavian Rusk": {
+        "role": "Gala committee chair",
+        "relationship_to_victim": "Former prot\u00e9g\u00e9 whose foundation depended on Vale's donations",
+        "motive": "Vale threatened to expose his fraudulent grant applications."
+      },
+      "Liora Sen": {
+        "role": "Resident jazz pianist",
+        "relationship_to_victim": "Vale's estranged sister",
+        "motive": "Vale had cut her out of their father's estate and planned to sell her home."
+      },
+      "Bram Hallow": {
+        "role": "River historian and guest speaker",
+        "relationship_to_victim": "Public critic of Vale's plans to dredge a historic riverbank",
+        "motive": "Vale's project would have destroyed the village where Hallow was born."
+      }
+    },
+    "killer": "Mara Quill",
+    "timeline": {
+      "Mara Quill": "At 9:44 p.m., Mara Quill was in the chart room, where she used her key to enter and killed Oren Vale with the silver letter opener.",
+      "Tavian Rusk": "At 9:44 p.m., Tavian Rusk was on the ballroom dais adjusting the charity auction microphone for the next announcement.",
+      "Liora Sen": "At 9:44 p.m., Liora Sen was in the lounge playing an instrumental interlude for the gala guests.",
+      "Bram Hallow": "At 9:44 p.m., Bram Hallow was on the aft observation deck speaking with the ship's navigation officer about the Stonebridge."
+    },
+    "statements": {
+      "Mara Quill": "At 9:44 p.m., I was in the ballroom overseeing the donor seating. I remained focused on the gala arrangements and saw no need to leave the public rooms.",
+      "Tavian Rusk": "At 9:44 p.m., I was on the ballroom dais adjusting the charity auction microphone for the next announcement. I stayed there while the technicians tested the sound and the guests gathered below.",
+      "Liora Sen": "At 9:44 p.m., I was in the lounge playing an instrumental interlude for the gala guests. I continued through the passage beneath Stonebridge, with the audience listening from the surrounding tables.",
+      "Bram Hallow": "At 9:44 p.m., I was on the aft observation deck speaking with the navigation officer about Stonebridge. We were discussing the bridge's construction and watched its supports slide past the ship."
+    }
+  },
+  {
+    "id": 23,
+    "title": "The Locked Icing Room",
+    "background": "On the morning after the grand reopening of Briar & Loaf, bakery owner Edrin Vale is found dead beside the display cakes in the upstairs icing room. The room has exactly one entrance: a single staircase leading up from the bakehouse. The body is discovered at 6:30 a.m., with the bakery already open to staff.",
+    "victim": "Edrin Vale",
+    "key_evidence": "The municipal inspection log records that the staircase gate was padlocked from 6:00 to 6:20 a.m. for a routine safety check.",
+    "characters": [
+      "Mara Venn",
+      "Jonas Pell",
+      "Sella Quist",
+      "Tobin Rusk"
+    ],
+    "character_info": {
+      "Mara Venn": {
+        "role": "Head decorator; claims she carried a cake tray down from the icing room at 6:12 a.m. and worked in the bakehouse afterward",
+        "relationship_to_victim": "Edrin's longtime employee and former business partner",
+        "motive": "Edrin planned to dismiss her after discovering she had been diverting custom orders."
+      },
+      "Jonas Pell": {
+        "role": "Oven supervisor",
+        "relationship_to_victim": "Edrin's nephew",
+        "motive": "Edrin had cut him out of the bakery's inheritance plans."
+      },
+      "Sella Quist": {
+        "role": "Front-counter manager",
+        "relationship_to_victim": "Edrin's oldest friend and former fianc\u00e9e",
+        "motive": "Edrin intended to sell the bakery without honoring her promised share."
+      },
+      "Tobin Rusk": {
+        "role": "Local flour supplier",
+        "relationship_to_victim": "Edrin's creditor and business acquaintance",
+        "motive": "Edrin owed him three months of unpaid deliveries and had threatened to switch suppliers."
+      }
+    },
+    "killer": "Mara Venn",
+    "timeline": {
+      "Mara Venn": "At 6:10 a.m., Mara was in the upstairs icing room killing Edrin with a brass cake scraper, and she remained there until 6:22 a.m. before descending the staircase.",
+      "Jonas Pell": "At 6:10 a.m., Jonas was in the rear bakehouse stoking the bread ovens and recording their temperatures.",
+      "Sella Quist": "At 6:10 a.m., Sella was at the front counter counting the reopening receipts in full view of the shop windows.",
+      "Tobin Rusk": "At 6:10 a.m., Tobin was outside the bakery loading empty flour sacks into his van on the delivery apron."
+    },
+    "statements": {
+      "Mara Venn": "I carried a cake tray down from the icing room at 6:12 a.m. and worked in the bakehouse afterward. I was absorbed in my regular work and noticed nothing unusual among the staff.",
+      "Jonas Pell": "At 6:10 a.m., I was in the rear bakehouse stoking the bread ovens and recording their temperatures. I stayed occupied with the morning bake and had no reason to go near the staircase.",
+      "Sella Quist": "At 6:10 a.m., I was at the front counter counting the reopening receipts in full view of the shop windows. I remained focused on the day's accounts and saw no disturbance in the bakery.",
+      "Tobin Rusk": "At 6:10 a.m., I was outside on the delivery apron loading empty flour sacks into my van. I was concentrating on clearing the supplies and did not enter the bakery during that task."
+    }
+  },
+  {
+    "id": 24,
+    "title": "The Locked Proof",
+    "background": "After the grand reopening of Hearth & Honey Bakery, owner Maribel Voss was found dead in the proofing room just before the morning rush. Her body was discovered at 6:30 a.m. by a delivery driver who raised the alarm. The proofing room has exactly one entrance, a single door from the sales floor.",
+    "victim": "Maribel Voss",
+    "key_evidence": "The bakery's electronic lock log records the proofing-room door as secured from the sales-floor side continuously from 6:10 a.m. until 6:29 a.m.",
+    "characters": [
+      "Iona Bell",
+      "Tomas Reed",
+      "Celeste Armitage",
+      "Garrick Noll"
+    ],
+    "character_info": {
+      "Iona Bell": {
+        "role": "Head baker and Maribel's longtime business partner",
+        "relationship_to_victim": "Business partner",
+        "motive": "Maribel planned to replace her after the reopening because of repeated recipe errors."
+      },
+      "Tomas Reed": {
+        "role": "Pastry apprentice",
+        "relationship_to_victim": "Former trainee",
+        "motive": "Maribel had threatened to dismiss him for stealing specialty ingredients."
+      },
+      "Celeste Armitage": {
+        "role": "Bakery manager",
+        "relationship_to_victim": "Employee and trusted confidante",
+        "motive": "Maribel discovered that Celeste had been diverting weekend receipts; Celeste claims she entered the proofing room at 6:18 a.m. to fetch flour."
+      },
+      "Garrick Noll": {
+        "role": "Local coffee roaster and reopening sponsor",
+        "relationship_to_victim": "Supplier and creditor",
+        "motive": "Maribel was about to expose his counterfeit fair-trade certificates and cancel his contract."
+      }
+    },
+    "killer": "Celeste Armitage",
+    "timeline": {
+      "Iona Bell": "At 6:20 a.m., Iona was in the kitchen icing the reopening cakes while arguing with the oven technician.",
+      "Tomas Reed": "At 6:20 a.m., Tomas was at the rear loading bay unloading a flour delivery under the driver's supervision.",
+      "Celeste Armitage": "At 6:20 a.m., Celeste was inside the proofing room, having entered at 6:02 a.m., struck Maribel with a brass scale, and remained there until leaving at 6:29 a.m.",
+      "Garrick Noll": "At 6:20 a.m., Garrick was in the street outside the bakery arranging coffee sacks beside his van."
+    },
+    "statements": {
+      "Iona Bell": "At 6:20 a.m., I was in the kitchen icing the reopening cakes while arguing with the oven technician. I stayed there through the morning preparations and never went near the proofing-room door before Maribel was found.",
+      "Tomas Reed": "At 6:20 a.m., I was at the rear loading bay unloading a flour delivery under the driver's supervision. I remained with the delivery until the alarm was raised and had no reason to enter the proofing room.",
+      "Celeste Armitage": "I went into the proofing room at 6:18 a.m. to fetch flour. I was simply carrying out the morning preparation Maribel had assigned, and I noticed nothing that seemed out of place.",
+      "Garrick Noll": "At 6:20 a.m., I was in the street outside the bakery arranging coffee sacks beside my van. I stayed with the delivery work until the alarm sounded and never entered the bakery during that period."
+    }
+  },
+  {
+    "id": 25,
+    "title": "The Staircase in the Storm",
+    "background": "During a violent weekend storm at Blackmere Manor, antiquarian Gideon Vale was found dead at 10:30 p.m. in his locked map archive, apparently struck with a bronze compass. The archive can be reached only by one staircase from the main hall.",
+    "victim": "Gideon Vale",
+    "key_evidence": "The staircase pressure sensor recorded no foot traffic between 10:05 p.m. and 10:25 p.m.",
+    "characters": [
+      "Elara Vale",
+      "Marius Quill",
+      "Nessa Brant",
+      "Rowan Saye"
+    ],
+    "character_info": {
+      "Elara Vale": {
+        "role": "the victim's estranged daughter and heir",
+        "relationship_to_victim": "daughter",
+        "motive": "Gideon planned to sell the manor and disinherit her after discovering she had forged his signature."
+      },
+      "Marius Quill": {
+        "role": "the manor's private secretary",
+        "relationship_to_victim": "employee",
+        "motive": "Gideon had uncovered that Marius was diverting money from the estate's restoration accounts."
+      },
+      "Nessa Brant": {
+        "role": "the visiting antique dealer",
+        "relationship_to_victim": "business associate",
+        "motive": "Gideon intended to expose her scheme to substitute modern replicas for rare objects she sold through him."
+      },
+      "Rowan Saye": {
+        "role": "the estate's weathered groundskeeper",
+        "relationship_to_victim": "longtime employee",
+        "motive": "Gideon had decided to dismiss Rowan and demolish the cottage where Rowan's family had lived for generations."
+      }
+    },
+    "killer": "Marius Quill",
+    "timeline": {
+      "Elara Vale": "At 10:18 p.m., Elara was in the music room burning old correspondence in the grate.",
+      "Marius Quill": "At 10:00 p.m., Marius entered the map archive through the staircase, killed Gideon at 10:18 p.m., and later claimed that he had entered the archive at 10:15 p.m.",
+      "Nessa Brant": "At 10:18 p.m., Nessa was in the south guest bedroom telephoning her broker on the manor's landline.",
+      "Rowan Saye": "At 10:18 p.m., Rowan was in the generator shed restarting the storm-damaged backup motor."
+    },
+    "statements": {
+      "Elara Vale": "At 10:18 p.m., I was in the music room, burning old correspondence in the grate. I stayed there through the storm, keeping away from the archive and its staircase.",
+      "Marius Quill": "The storm left the household's paperwork in disarray, so I remained occupied with my regular duties. At 10:15 p.m., I entered the map archive by the main staircase to speak with Gideon about the accounts.",
+      "Nessa Brant": "At 10:18 p.m., I was in the south guest bedroom, speaking with my broker on the manor's landline. The call occupied me through the worst of the storm, and I never went near the archive.",
+      "Rowan Saye": "At 10:18 p.m., I was in the generator shed, restarting the backup motor damaged by the storm. I remained with the machinery until it was running steadily, nowhere near the manor staircase."
+    }
+  },
+  {
+    "id": 26,
+    "title": "Death on the Lower Deck",
+    "background": "During a glittering fundraiser aboard the river cruise ship Meridian Belle, shipping magnate Alistair Venn is found dead in the chart room at 10:31 p.m., shortly after the gala's auction. The chart room has exactly one door, opening onto the main salon. A storm has delayed the ship's next landing, leaving the guests aboard while the investigation begins.",
+    "victim": "Alistair Venn",
+    "key_evidence": "The chart-room latch log records the door opening at 10:14 p.m. and 10:24 p.m.; each opening is followed by a recorded closure, and there is no opening between those times.",
+    "characters": [
+      "Bram Holt",
+      "Celia Venn",
+      "Nessa Quill",
+      "Oren Pike"
+    ],
+    "character_info": {
+      "Bram Holt": {
+        "role": "The ship's chief engineer, who claims his alibi is that he entered the chart room at 10:22 p.m. to inspect a fuse.",
+        "relationship_to_victim": "Former business partner",
+        "motive": "Venn was about to expose Bram's embezzlement from a failed marina project."
+      },
+      "Celia Venn": {
+        "role": "The gala director and the victim's estranged sister",
+        "relationship_to_victim": "Younger sister",
+        "motive": "Alistair had cut her out of the family's charitable foundation after discovering she diverted donations."
+      },
+      "Nessa Quill": {
+        "role": "A celebrated auctioneer conducting the fundraiser",
+        "relationship_to_victim": "Professional associate",
+        "motive": "Venn possessed proof that Nessa had secretly inflated bids at several charity auctions."
+      },
+      "Oren Pike": {
+        "role": "The Meridian Belle's pianist and evening entertainer",
+        "relationship_to_victim": "Former employee",
+        "motive": "Venn had ruined Oren's career by blaming him for a publicized gambling scandal."
+      }
+    },
+    "killer": "Bram Holt",
+    "timeline": {
+      "Bram Holt": "At 10:20 p.m., Bram was inside the chart room, having entered at 10:14 p.m., striking Alistair with a brass sounding weight, and remaining there until he left at 10:24 p.m.",
+      "Celia Venn": "At 10:20 p.m., Celia was at the main-salon podium rehearsing the next auction announcement with the event microphone.",
+      "Nessa Quill": "At 10:20 p.m., Nessa was in the forward lounge counting numbered bid paddles with the cruise director.",
+      "Oren Pike": "At 10:20 p.m., Oren was on the aft observation deck tuning the portable piano before his next set."
+    },
+    "statements": {
+      "Bram Holt": "At 10:22 p.m., I entered the chart room to inspect a fuse. The inspection was routine, and nothing about the electrical panel seemed unusual to me.",
+      "Celia Venn": "At 10:20 p.m., I was at the main-salon podium rehearsing the next auction announcement through the event microphone. I remained there preparing the gala program and speaking where the assembled guests could hear me.",
+      "Nessa Quill": "At 10:20 p.m., I was in the forward lounge counting numbered bid paddles with the cruise director. We were checking the auction materials together before the next portion of the fundraiser began.",
+      "Oren Pike": "At 10:20 p.m., I was on the aft observation deck tuning the portable piano before my next set. I was working through the instrument carefully while the storm kept the ship and its guests aboard."
+    }
+  },
+  {
+    "id": 27,
+    "title": "The Last Rise",
+    "background": "At Bramble & Hearth Bakery, the morning after its grand reopening, owner Celia Wren is found dead in the flour loft above the shop. She appears to have been struck with a brass proofing weight sometime before dawn. The flour loft has exactly one access point, a locked stairwell door whose only key is held by the bakery manager.",
+    "victim": "Celia Wren",
+    "key_evidence": "The stairwell lock's independently archived electronic log records a valid key turn at 5:56 a.m.",
+    "characters": [
+      "Mara Venn",
+      "Ivo Pell",
+      "Tamsin Rook",
+      "Galen Saye"
+    ],
+    "character_info": {
+      "Mara Venn": {
+        "role": "Bakery manager, who claims she remained at the front counter all morning",
+        "relationship_to_victim": "Celia's longtime business partner",
+        "motive": "Celia had discovered that Mara was diverting reopening proceeds into a secret account."
+      },
+      "Ivo Pell": {
+        "role": "Head pastry chef",
+        "relationship_to_victim": "Former apprentice and employee",
+        "motive": "Celia planned to replace him after he ruined several batches during the reopening."
+      },
+      "Tamsin Rook": {
+        "role": "Local food columnist",
+        "relationship_to_victim": "Former friend and frequent critic",
+        "motive": "Celia threatened to expose Tamsin's practice of accepting payment for favorable reviews."
+      },
+      "Galen Saye": {
+        "role": "Oven repair contractor",
+        "relationship_to_victim": "Celia's unpaid maintenance contractor",
+        "motive": "Celia had refused to settle a large repair bill and blamed him for the reopening delays."
+      }
+    },
+    "killer": "Mara Venn",
+    "timeline": {
+      "Mara Venn": "At 5:56 a.m. in the flour loft, Mara struck Celia with the brass proofing weight and then returned downstairs.",
+      "Ivo Pell": "At 5:56 a.m. in the mixing room, Ivo was recalibrating the bakery scales before the first dough batch.",
+      "Tamsin Rook": "At 5:56 a.m. in the front dining room, Tamsin was writing notes about the reopening for her column.",
+      "Galen Saye": "At 5:56 a.m. in the rear loading bay, Galen was repairing the starter motor on his service van."
+    },
+    "statements": {
+      "Mara Venn": "I remained at the front counter throughout the early morning, handling the opening ledger and greeting the first deliveries. The stairwell lock record shows a valid key turn at 5:42 a.m., before the shop became busy.",
+      "Ivo Pell": "At 5:56 a.m., I was in the mixing room recalibrating the bakery scales before starting the first dough batch. I stayed there with the test weights and preparation sheets until the ovens were ready.",
+      "Tamsin Rook": "At 5:56 a.m., I was in the front dining room writing notes about the reopening for my column. My notebook was open beside the window, and I remained there reviewing yesterday\u2019s service.",
+      "Galen Saye": "At 5:56 a.m., I was in the rear loading bay repairing the starter motor on my service van. I had my tool case open beside the vehicle and was testing the wiring when the morning work began."
+    }
+  },
+  {
+    "id": 28,
+    "title": "Murder Below Deck",
+    "background": "During a gala fundraiser aboard the river cruise ship Aurelia, charity chair Lenora Quill is found dead in the ship's chart room. A deckhand discovers her there at 9:47 p.m., beside a shattered champagne flute. The chart room has exactly one entrance: a single door whose only physical key is held by the ship's purser.",
+    "victim": "Lenora Quill",
+    "key_evidence": "The ship's mechanical lock log records the chart-room door being opened with a physical key at 9:18 p.m. and not being opened again until 9:47 p.m.",
+    "characters": [
+      "Dorian Venn",
+      "Iris Pell",
+      "Matteo Saye",
+      "Anika Rusk"
+    ],
+    "character_info": {
+      "Dorian Venn": {
+        "role": "Ship's purser, who publicly claims he was in the engine control room from 9:15 to 9:40 p.m.",
+        "relationship_to_victim": "He managed the charity's donation accounts for Lenora.",
+        "motive": "Lenora had discovered that he was diverting gala funds into a hidden account."
+      },
+      "Iris Pell": {
+        "role": "Gala auctioneer",
+        "relationship_to_victim": "She was Lenora's longtime business partner.",
+        "motive": "Lenora planned to cancel their lucrative auctioneering contract after a bitter dispute."
+      },
+      "Matteo Saye": {
+        "role": "Shipboard pianist",
+        "relationship_to_victim": "He was Lenora's former fianc\u00e9.",
+        "motive": "Lenora had threatened to expose his gambling debts to the board."
+      },
+      "Anika Rusk": {
+        "role": "Environmental campaign director and gala speaker",
+        "relationship_to_victim": "She relied on Lenora's foundation for her research funding.",
+        "motive": "Lenora had decided to withdraw support after Anika falsified a research expense report."
+      }
+    },
+    "killer": "Dorian Venn",
+    "timeline": {
+      "Dorian Venn": "At 9:31 p.m., Dorian was inside the chart room, where he struck Lenora with a brass navigation weight and waited until 9:47 p.m. to leave.",
+      "Iris Pell": "At 9:31 p.m., Iris was in the forward ballroom rehearsing the closing auction announcement with the event coordinator.",
+      "Matteo Saye": "At 9:31 p.m., Matteo was on the aft lounge stage playing a recorded interlude while the house band took its break.",
+      "Anika Rusk": "At 9:31 p.m., Anika was on the open observation deck speaking with three donors beside the lifeboat rail."
+    },
+    "statements": {
+      "Dorian Venn": "At 9:31 p.m., I used my physical key to open the chart-room door while checking routine ship business. I then returned to my regular purser\u2019s duties, with no reason to involve myself in Lenora\u2019s affairs.",
+      "Iris Pell": "At 9:31 p.m., I was in the forward ballroom rehearsing the closing auction announcement with the event coordinator. The final bidding materials were still arranged beside us, and I remained there preparing the gala\u2019s conclusion.",
+      "Matteo Saye": "At 9:31 p.m., I was on the aft lounge stage playing a recorded interlude while the house band took its break. The musicians were nearby waiting to resume, and I stayed at the piano until the interlude ended.",
+      "Anika Rusk": "At 9:31 p.m., I was on the open observation deck speaking with three donors beside the lifeboat rail. They were discussing the foundation\u2019s research priorities, and I remained with them during that conversation."
+    }
+  },
+  {
+    "id": 29,
+    "title": "The Last Rise",
+    "background": "On the morning after the grand reopening of Hearth & Hollow Bakery, owner Bram Bellweather is found dead in the upstairs cooling loft, struck with a cast-iron bread stamp. The loft has exactly one entrance: a single stairwell door leading up from the bakehouse. His body is discovered shortly after dawn by the opening cleaner.",
+    "victim": "Bram Bellweather",
+    "key_evidence": "The loft door's time-stamped access sensor recorded one opening at 6:18 a.m. and one closing at 6:20 a.m.",
+    "characters": [
+      "Nella Voss",
+      "Orrin Pike",
+      "Selma Quill",
+      "Tavian Rusk"
+    ],
+    "character_info": {
+      "Nella Voss": {
+        "role": "Head baker",
+        "relationship_to_victim": "Bram's longtime business partner",
+        "motive": "Bram planned to replace her with a younger pastry chef after the reopening."
+      },
+      "Orrin Pike": {
+        "role": "Delivery driver",
+        "relationship_to_victim": "Bram's nephew and employee",
+        "motive": "Bram had discovered that Orrin was selling bakery supplies on the side."
+      },
+      "Selma Quill": {
+        "role": "Front-counter manager",
+        "relationship_to_victim": "Bram's former fianc\u00e9e",
+        "motive": "Bram had withheld her promised share of the bakery after their breakup."
+      },
+      "Tavian Rusk": {
+        "role": "Pastry consultant",
+        "relationship_to_victim": "Bram's newest hire",
+        "motive": "Bram threatened to expose Tavian's copied recipes and dismiss him."
+      }
+    },
+    "killer": "Tavian Rusk",
+    "timeline": {
+      "Nella Voss": "At 6:18 a.m., Nella was in the ground-floor bakehouse calibrating the ovens while preparing the first batch of rolls.",
+      "Orrin Pike": "At 6:18 a.m., Orrin was beside his van in the rear loading yard, counting crates for the morning delivery.",
+      "Selma Quill": "At 6:18 a.m., Selma was in the front shop arranging the display case and switching on its lights.",
+      "Tavian Rusk": "At 6:18 a.m., Tavian went through the stairwell door into the cooling loft and killed Bram with the bread stamp, although he later claimed he was outside in the alley making a phone call."
+    },
+    "statements": {
+      "Nella Voss": "At 6:18 a.m., I was in the ground-floor bakehouse calibrating the ovens while preparing the first batch of rolls. I remained there attending to the ovens as the bakery\u2019s morning work began.",
+      "Orrin Pike": "At 6:18 a.m., I was beside my van in the rear loading yard, counting crates for the morning delivery. I stayed with the shipment until the morning deliveries were ready to leave.",
+      "Selma Quill": "At 6:18 a.m., I was in the front shop arranging the display case and switching on its lights. I remained at the counter, making sure the bakery was ready for its first customers.",
+      "Tavian Rusk": "At 6:18 a.m., I was outside in the alley making a phone call. I stayed focused on the morning\u2019s preparations and did not involve myself in the bakehouse\u2019s opening routine."
+    }
+  },
+  {
+    "id": 30,
+    "title": "The Sealed Gallery",
+    "background": "At the opening of the Larkspur Gallery's new exhibition, curator Mara Venn was found dead inside the restoration vault, beside a missing miniature known as The Blue Orchard. The restoration vault has exactly one door, and only the gallery's security contractor holds its key.",
+    "victim": "Mara Venn",
+    "key_evidence": "The vault's key-control cabinet recorded its key being removed at 9:41 p.m. and returned at 9:48 p.m.",
+    "characters": [
+      "Gideon Rusk",
+      "Elian Sorell",
+      "Nadia Pell",
+      "Tomas Wren"
+    ],
+    "character_info": {
+      "Gideon Rusk": {
+        "role": "Gallery security contractor who told guests he remained at the ticket desk throughout the critical period",
+        "relationship_to_victim": "Employed by Mara to oversee the gallery's security",
+        "motive": "Mara had discovered that Gideon was selling duplicate access credentials to collectors"
+      },
+      "Elian Sorell": {
+        "role": "Painter whose work was featured in the exhibition",
+        "relationship_to_victim": "Former prot\u00e9g\u00e9 and recent artistic rival of Mara",
+        "motive": "Mara planned to remove his paintings after accusing him of forging provenance records"
+      },
+      "Nadia Pell": {
+        "role": "Gallery registrar and exhibition coordinator",
+        "relationship_to_victim": "Mara's longtime professional assistant",
+        "motive": "Mara intended to dismiss Nadia for concealing insurance discrepancies"
+      },
+      "Tomas Wren": {
+        "role": "Private collector and opening-night sponsor",
+        "relationship_to_victim": "Major client whose collection Mara publicly criticized",
+        "motive": "Mara had refused to sell him The Blue Orchard despite his repeated offers"
+      }
+    },
+    "killer": "Gideon Rusk",
+    "timeline": {
+      "Gideon Rusk": "At 9:44 p.m. in the restoration vault, Gideon struck Mara with a bronze display weight and removed The Blue Orchard before locking the door.",
+      "Elian Sorell": "At 9:44 p.m. in the east exhibition hall, Elian was demonstrating his painting technique to three visiting art students.",
+      "Nadia Pell": "At 9:44 p.m. in the catering corridor, Nadia was counting unopened wine cases with the caterer's delivery manager.",
+      "Tomas Wren": "At 9:44 p.m. on the gallery's front terrace, Tomas was speaking with a local arts reporter beside the smoking heater."
+    },
+    "statements": {
+      "Gideon Rusk": "I remember keeping to the ticket desk throughout the critical period, helping guests and answering routine security questions. The key-control cabinet records no removal of the vault key at 9:41 p.m.",
+      "Elian Sorell": "At 9:44 p.m., I was in the east exhibition hall demonstrating my painting technique to three visiting art students. They stayed with me as I explained the brushwork, and I did not leave the exhibition floor.",
+      "Nadia Pell": "At 9:44 p.m., I was in the catering corridor counting unopened wine cases with the caterer's delivery manager. We checked the seals and quantities together, and I remained there until the count was complete.",
+      "Tomas Wren": "At 9:44 p.m., I was on the front terrace speaking with a local arts reporter beside the smoking heater. Our conversation continued in full view of the terrace entrance, and I stayed there through the critical period."
+    }
   }
 ]

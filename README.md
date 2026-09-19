@@ -76,16 +76,24 @@ crime scene has exactly one entrance). The killer's statement only
 contradicts the evidence once both facts are combined - a real two-step
 inference, not a one-line lookup.
 
-One live 3-judge run against real APIs (`jev-latest`,
+A batch run of `python -m jev_game.run_benchmark --repeats 3` against real
+APIs (`jev-latest`, `GENERATOR_MODEL=gpt-5.6-luna`,
 `JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`,
-`JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`), 10 rounds, played through the actual
-judges (not simulated), scenarios saved to `scenarios_two_step.json`:
+`JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`): 30 scenarios (10 original + 20
+freshly generated through the same two-step-evidence case-design path),
+each judge called 3 independent times per scenario (90 rounds/judge
+total), not simulated. Latency is reported as p50/p95 in seconds rather
+than a mean in milliseconds, since tail latency is what users actually
+feel and a single average hides it. **Stability** is the fraction of
+scenarios where a judge gave the *same* answer on all 3 independent
+repeats — a judge that flips its answer on a fixed input is unreliable
+even if its accuracy looks fine.
 
-| Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|---|---|
-| **v4 — two-step evidence** | **100%** (10/10) | **385 ms** | **90%** (9/10) | **705 ms** | **100%** (10/10) | **902 ms** |
+| Scenarios × repeats | Jev | SLM | LLM |
+|---|---|---|---|
+| 30 × 3 (90 rounds/judge) | acc 97.8% (88/90) / p50 0.326s / p95 0.450s / stability 96.7% | acc 96.7% (87/90) / p50 0.710s / p95 0.949s / stability 93.3% | acc 96.7% (87/90) / p50 0.857s / p95 1.034s / stability 100% |
 
-Example case (round 2, "The Last Signal"): the signal room "could be opened
+Example case (scenario 2, "The Last Signal"): the signal room "could be opened
 only with a brass key held by Rowan Vale" (the connecting fact, stated in
 `background`); `key_evidence` says "The brass key was recorded turning in
 the signal room lock at 10:14 p.m." - a neutral lock log that names no one.
@@ -97,19 +105,21 @@ both caught this; the SLM judge picked the wrong suspect (Tomas Reed) on
 this round.
 
 **Takeaways:**
-- The two-step design produced a real accuracy gap: Jev and the large LLM
-  judge both hit 100%, while the SLM judge missed 1/10 rounds (90%) - the
-  accuracy gap here tracks model size (small vs. large chat model) rather
-  than judge count.
-- This is a single 10-round sample, so the gap is suggestive, not
-  conclusive - worth re-running with more rounds or more seeds before
-  treating it as reliable.
-- Latency ordering held: Jev was fastest (385 ms), then the SLM (705 ms),
-  then the LLM slowest (902 ms).
-- Inspecting individual cases (e.g. round 2 above) confirms the generator is
-  actually producing two-step clues as designed, not accidentally leaking a
-  one-step tell - `key_evidence` alone never names a character or states an
-  impossibility.
+- The two-step design narrowed but didn't erase the accuracy gap: Jev led
+  at 97.8% (88/90), with the SLM and LLM judges tied just behind at 96.7%
+  (87/90 each) - unlike v1/v2, where the LLM judge matched or beat Jev, the
+  extra reasoning hop here cost the large chat model too.
+- Stability told a clearer story than accuracy: Jev (96.7%) and the LLM
+  judge (100%) both gave a consistent answer across repeats on nearly every
+  scenario, while the SLM judge flipped its answer on 6.7% of scenarios
+  (93.3% stability) - a two-step inference is harder for a small model to
+  reproduce reliably even when it eventually lands on the right answer.
+- The latency ordering held regardless of accuracy: Jev fastest (p50
+  0.326s), then the SLM (p50 0.710s), then the LLM slowest (p50 0.857s).
+- Inspecting individual cases (e.g. scenario 2 above) confirms the generator
+  is actually producing two-step clues as designed, not accidentally leaking
+  a one-step tell - `key_evidence` alone never names a character or states
+  an impossibility.
 
 ## Test
 

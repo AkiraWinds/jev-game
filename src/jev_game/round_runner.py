@@ -8,6 +8,18 @@ from jev_game.judge_llm import LlmJudgment, judge_with_llm, judge_with_slm
 from jev_game.scenarios import Scenario
 
 
+def percentile(values: list[float], pct: float) -> float | None:
+    """Linear-interpolated percentile (0-100) of a list of numbers."""
+    if not values:
+        return None
+    ordered = sorted(values)
+    rank = (len(ordered) - 1) * (pct / 100)
+    lo, hi = int(rank), min(int(rank) + 1, len(ordered) - 1)
+    if lo == hi:
+        return ordered[lo]
+    return ordered[lo] + (ordered[hi] - ordered[lo]) * (rank - lo)
+
+
 @dataclass
 class RoundResult:
     scenario_id: int
@@ -49,13 +61,24 @@ class Scoreboard:
     def _summary(self, correct_attr: str, latency_attr: str) -> dict:
         n = len(self.rounds)
         if n == 0:
-            return {"rounds": 0, "accuracy": None, "avg_latency_ms": None}
+            return {
+                "rounds": 0,
+                "accuracy": None,
+                "avg_latency_ms": None,
+                "avg_latency_s": None,
+                "p50_latency_s": None,
+                "p95_latency_s": None,
+            }
         correct = sum(1 for r in self.rounds if getattr(r, correct_attr))
-        total_latency = sum(getattr(r, latency_attr).latency_ms for r in self.rounds)
+        latencies_ms = [getattr(r, latency_attr).latency_ms for r in self.rounds]
+        latencies_s = [ms / 1000 for ms in latencies_ms]
         return {
             "rounds": n,
             "accuracy": correct / n,
-            "avg_latency_ms": total_latency / n,
+            "avg_latency_ms": sum(latencies_ms) / n,
+            "avg_latency_s": sum(latencies_s) / n,
+            "p50_latency_s": percentile(latencies_s, 50),
+            "p95_latency_s": percentile(latencies_s, 95),
         }
 
     def summary(self) -> dict:
