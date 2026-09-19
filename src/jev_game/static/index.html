@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Jev vs SLM vs LLM: Mafia Judge Comparison</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; background: #fafafa; color: #1a1a1a; }
+    h1 { font-size: 1.4rem; }
+    .summary { display: flex; gap: 1rem; margin: 1rem 0; }
+    .card { flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background: #fff; }
+    .card h2 { margin: 0 0 0.5rem; font-size: 1rem; }
+    .card .big { font-size: 1.8rem; font-weight: 600; }
+    .card .sub { color: #666; font-size: 0.85rem; }
+    button { font-size: 1rem; padding: 0.5rem 1rem; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+    th, td { border-bottom: 1px solid #e5e5e5; padding: 0.4rem 0.5rem; text-align: left; }
+    .correct { color: #1a7f37; font-weight: 600; }
+    .wrong { color: #cf222e; font-weight: 600; }
+    #statements { font-size: 0.85rem; color: #444; margin-top: 0.5rem; white-space: pre-wrap; }
+    #case { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background: #fff; margin-top: 1rem; }
+    #case h3 { margin: 0 0 0.3rem; }
+    #case .background { color: #444; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    #case .evidence { color: #7a4a00; background: #fff6e5; border-radius: 6px; padding: 0.5rem 0.7rem; font-size: 0.85rem; margin-bottom: 0.5rem; }
+    #case .bios { font-size: 0.85rem; color: #444; }
+    #case .bios div { margin-bottom: 0.3rem; }
+  </style>
+</head>
+<body>
+  <h1>Jev vs SLM vs LLM: who spots the killer faster and more accurately?</h1>
+  <button id="play">Run next round</button>
+  <span id="status"></span>
+
+  <div class="summary">
+    <div class="card">
+      <h2>Jev</h2>
+      <div class="big" id="jev-accuracy">-</div>
+      <div class="sub" id="jev-latency">-</div>
+    </div>
+    <div class="card">
+      <h2>SLM Judge</h2>
+      <div class="big" id="slm-accuracy">-</div>
+      <div class="sub" id="slm-latency">-</div>
+    </div>
+    <div class="card">
+      <h2>LLM Judge</h2>
+      <div class="big" id="llm-accuracy">-</div>
+      <div class="sub" id="llm-latency">-</div>
+    </div>
+  </div>
+
+  <div id="case" hidden>
+    <h3 id="case-title"></h3>
+    <div class="background" id="case-background"></div>
+    <div class="evidence" id="case-evidence"></div>
+    <div class="bios" id="case-bios"></div>
+  </div>
+
+  <div id="statements"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Killer</th>
+        <th>Jev pick</th><th>Jev conf.</th><th>Jev ms</th>
+        <th>SLM pick</th><th>SLM conf.</th><th>SLM ms</th>
+        <th>LLM pick</th><th>LLM conf.</th><th>LLM ms</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <script>
+    const playBtn = document.getElementById("play");
+    const statusEl = document.getElementById("status");
+    const rowsEl = document.getElementById("rows");
+    const statementsEl = document.getElementById("statements");
+    const caseEl = document.getElementById("case");
+    const caseTitleEl = document.getElementById("case-title");
+    const caseBackgroundEl = document.getElementById("case-background");
+    const caseEvidenceEl = document.getElementById("case-evidence");
+    const caseBiosEl = document.getElementById("case-bios");
+
+    function escapeHtml(s) {
+      const div = document.createElement("div");
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function fmtPct(x) { return x === null || x === undefined ? "-" : (x * 100).toFixed(0) + "%"; }
+    function fmtMs(x) { return x === null || x === undefined ? "-" : x.toFixed(0) + " ms"; }
+
+    function renderSummary(summary) {
+      document.getElementById("jev-accuracy").textContent = fmtPct(summary.jev.accuracy);
+      document.getElementById("jev-latency").textContent = `${summary.jev.rounds} rounds, avg ${fmtMs(summary.jev.avg_latency_ms)}`;
+      document.getElementById("slm-accuracy").textContent = fmtPct(summary.slm.accuracy);
+      document.getElementById("slm-latency").textContent = `${summary.slm.rounds} rounds, avg ${fmtMs(summary.slm.avg_latency_ms)}`;
+      document.getElementById("llm-accuracy").textContent = fmtPct(summary.llm.accuracy);
+      document.getElementById("llm-latency").textContent = `${summary.llm.rounds} rounds, avg ${fmtMs(summary.llm.avg_latency_ms)}`;
+    }
+
+    function renderRow(data) {
+      const tr = document.createElement("tr");
+      const jevClass = data.jev_correct ? "correct" : "wrong";
+      const slmClass = data.slm_correct ? "correct" : "wrong";
+      const llmClass = data.llm_correct ? "correct" : "wrong";
+      tr.innerHTML = `
+        <td>${data.scenario_id}</td>
+        <td>${data.killer}</td>
+        <td class="${jevClass}">${data.jev.choice}</td>
+        <td>${fmtPct(data.jev.confidence)}</td>
+        <td>${fmtMs(data.jev.latency_ms)}</td>
+        <td class="${slmClass}">${data.slm.choice}</td>
+        <td>${fmtPct(data.slm.confidence)}</td>
+        <td>${fmtMs(data.slm.latency_ms)}</td>
+        <td class="${llmClass}">${data.llm.choice}</td>
+        <td>${fmtPct(data.llm.confidence)}</td>
+        <td>${fmtMs(data.llm.latency_ms)}</td>
+      `;
+      rowsEl.prepend(tr);
+    }
+
+    async function playRound() {
+      playBtn.disabled = true;
+      statusEl.textContent = "running...";
+      try {
+        const res = await fetch("/api/round", { method: "POST" });
+        if (!res.ok) {
+          const err = await res.json();
+          statusEl.textContent = err.detail || "error";
+          playBtn.disabled = true;
+          return;
+        }
+        const data = await res.json();
+        renderRow(data);
+        renderSummary(data.summary);
+
+        caseEl.hidden = false;
+        caseTitleEl.textContent = `#${data.scenario_id}: ${data.title} (victim: ${data.victim})`;
+        caseBackgroundEl.textContent = data.background;
+        caseEvidenceEl.textContent = `Key evidence: ${data.key_evidence}`;
+        caseBiosEl.innerHTML = Object.entries(data.character_info)
+          .map(([name, info]) => `<div><strong>${escapeHtml(name)}</strong> - ${escapeHtml(info.role)}; relationship to victim: ${escapeHtml(info.relationship_to_victim)}; possible motive: ${escapeHtml(info.motive)}</div>`)
+          .join("");
+
+        statementsEl.textContent = Object.entries(data.statements)
+          .map(([name, line]) => `${name}: ${line}`).join("\n\n");
+        statusEl.textContent = `${data.remaining} scenario(s) remaining`;
+        playBtn.disabled = data.remaining <= 0;
+      } catch (e) {
+        statusEl.textContent = "request failed: " + e;
+      } finally {
+        if (!playBtn.disabled) playBtn.disabled = false;
+      }
+    }
+
+    playBtn.addEventListener("click", playRound);
+  </script>
+</body>
+</html>
