@@ -1,7 +1,5 @@
 # jev-game
 
-A minimal Python starter project.
-
 ## Jev vs. SLM vs. LLM judge comparison
 
 The runnable comparison app (case generator, judges, FastAPI server) lives
