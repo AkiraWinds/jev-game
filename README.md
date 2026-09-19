@@ -67,65 +67,46 @@ pre-generated scenarios.
 
 ## Results (v1 / baseline)
 
-Two live runs against real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1` (later
-`gpt-5.6-terra`), `JUDGE_LLM_MODEL=gpt-4.1-mini`), 10 rounds each, played
-through the actual server + judges (not simulated):
+Three live runs against real APIs, 10 rounds each, played through the actual
+server + judges (not simulated). The first two rows are two-judge runs
+(`jev-latest`, `GENERATOR_MODEL=gpt-4.1` (later `gpt-5.6-terra`),
+`JUDGE_LLM_MODEL=gpt-4.1-mini`); the v1 (3-judge) row adds a small model as
+a third judge (`jev-latest`, `JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`,
+`JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`), same 10 pre-generated `scenarios.json`
+rounds as the two-judge v1 run:
 
-| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|
-| v0 — killer's statement just "subtly evasive" (no explicit checkable clue) | 40–50% | 815 ms* | 40–50% | 841 ms* |
-| **v1 — killer's statement contains one fact that contradicts an explicit `key_evidence`** | **100%** | **388 ms** | **100%** | **701 ms** |
+| Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
+|---|---|---|---|---|---|---|
+| v0 — killer's statement just "subtly evasive" (no explicit checkable clue) | 40–50% | 815 ms* | — | — | 40–50% | 841 ms* |
+| v1 — killer's statement contains one fact that contradicts an explicit `key_evidence` (2-judge) | 100% | 388 ms | — | — | 100% | 701 ms |
+| **v1 — same case design, 3-judge (Jev vs. small LLM vs. large LLM)** | **100%** (10/10) | **449 ms** | **90%** (9/10) | **872 ms** | **100%** (10/10) | **1060 ms** |
 
 \* v0's latency numbers also predate a fix: both judge clients were being
 re-created per round (fresh TCP/TLS handshake each time), which added fixed
-overhead that shrank the visible gap between the two models. v1's numbers
-are measured after switching to one long-lived client per process.
+overhead that shrank the visible gap between the two models. Later rows are
+measured after switching to one long-lived client per process. SLM columns
+are "—" for v0/2-judge v1 because the small-model judge didn't exist yet
+when those were run.
 
 **Takeaways:**
 - v0's "vague vs. confident tone" tell was too soft — both models were only
   marginally better than the 25% random-guess floor (4 suspects/round).
 - Making the clue a concrete, checkable contradiction (a real "fair play"
-  whodunit clue, not a stylistic hint) took both judges to 100% accuracy on
-  this batch — the puzzle became reliably solvable, which is good for
-  validating the design, but it's now too easy to show an *accuracy*
-  difference between Jev and the LLM judge on this size of case.
-- The **latency** gap held up once measurement overhead was removed: Jev
-  runs roughly 2× faster than the LLM judge per round.
+  whodunit clue, not a stylistic hint) took Jev and the large LLM judge to
+  100% accuracy on this batch — the puzzle became reliably solvable, which
+  is good for validating the design, but too easy to show an accuracy gap
+  between a calibrated `Choice` judge and a single large chat LLM judge.
+- Adding a **third, small-model judge** did separate the judges on this
+  same case design: the small model missed 1/10 rounds that both Jev and
+  the large model got right. Jev also came out fastest of all three here —
+  not just faster than the small model, but ~2.4× faster than the large one
+  too, while matching the large model's accuracy exactly.
+- The SLM's 90% is a single 10-round sample (one missed round) — suggestive
+  of a real small-vs-large capability gap on this task, not conclusive; worth
+  re-running with more rounds/seeds.
 - Open question for future variants: can a harder case (more characters, a
-  red herring, or a clue that needs two facts combined) create a real
-  accuracy gap between a calibrated `Choice` judge and a chat LLM judge,
-  without regressing to unsolvable-by-either?
-
-## Results (v5 — three-way judge: Jev vs SLM vs LLM)
-
-Same v1 case design (`scenarios.json`, one `key_evidence` fact the killer's
-statement contradicts) and the same 10 pre-generated rounds used for v1, but
-`judge_llm.py` now serves two separate judges off one shared client instead
-of one, and a third judge was added to `round_runner.py`/`Scoreboard`. One
-live run against real APIs (`jev-latest`, `JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`,
-`JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`), played through `round_runner.run_round`
-(not simulated):
-
-| Judge | Accuracy | Avg latency |
-|---|---|---|
-| **Jev** (`Choice` primitive) | **100%** (10/10) | **449 ms** |
-| SLM (`gpt-5.4-nano-2026-03-17`) | 90% (9/10) | 872 ms |
-| LLM (`gpt-5.4-2026-03-05`) | 100% (10/10) | 1060 ms |
-
-**Takeaways:**
-- This is the first run where three-way comparison itself (not a harder
-  case design) separated the judges: the small chat model missed one round
-  that both Jev and the large chat model got right, on identical input.
-- Jev was faster than *both* chat models here - not just the small one -
-  roughly 2× faster than the SLM and 2.4× faster than the LLM, while
-  matching the LLM's accuracy exactly.
-- The SLM's miss is a single round out of 10 - suggestive of a real
-  capability gap between the small and large chat model on this task, but
-  not conclusive on this sample size; worth re-running with more rounds.
-- This result is orthogonal to the v2/v3/v4 case-design experiments on the
-  other branches (which only ever compared Jev vs. one LLM judge) - adding
-  a small model as a third judge is a separate lever from making the case
-  itself harder, and the two can be combined in a future variant.
+  red herring, or a clue that needs two facts combined) widen the gap
+  further, especially for the small model?
 
 ## Test
 
