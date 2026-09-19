@@ -1,9 +1,10 @@
 # jev-game
 
 A minimal Python starter project, now home to a small experiment comparing
-TypeSafe's Jev model against a plain chat LLM as a judge.
+TypeSafe's Jev model against two plain chat models - a small one (SLM) and
+a large one (LLM) - as judges.
 
-## Jev vs LLM: Mafia judge comparison
+## Jev vs SLM vs LLM: Mafia judge comparison
 
 Each round is a full whodunit case, designed offline before the server ever
 runs:
@@ -23,19 +24,22 @@ runs:
    that contradicts the key evidence.
 3. Both steps are cached to `scenarios.json`.
 
-At play time, two independent judges each see the case background, victim,
-key evidence, character bios, and statements (never the ground-truth killer
-or true timeline) and try to pick the killer:
+At play time, three independent judges each see the case background,
+victim, key evidence, character bios, and statements (never the
+ground-truth killer or true timeline) and try to pick the killer:
 
 - **Jev** (`Choice` primitive) — a calibrated probability per suspect
-- **A second, different OpenAI model** (`JUDGE_LLM_MODEL`) — prompted for
-  the same pick + a self-reported confidence
+- **A small OpenAI chat model** (`JUDGE_SLM_MODEL`) — prompted for the same
+  pick + a self-reported confidence
+- **A large OpenAI chat model** (`JUDGE_LLM_MODEL`) — same prompt, bigger
+  model
 
-`GENERATOR_MODEL` and `JUDGE_LLM_MODEL` are deliberately different models so
-Judge B is never evaluating text written by its own weights/style.
+`GENERATOR_MODEL`, `JUDGE_SLM_MODEL`, and `JUDGE_LLM_MODEL` are deliberately
+three different models so no judge is ever evaluating text written by its
+own weights/style.
 
-Both are timed independently per round; a web page shows a running
-accuracy and average-latency comparison.
+All three are timed independently per round; a web page shows a running
+accuracy and average-latency comparison across all three.
 
 ### Setup
 

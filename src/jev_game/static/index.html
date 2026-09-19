@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Jev vs LLM: Mafia Judge Comparison</title>
+  <title>Jev vs SLM vs LLM: Mafia Judge Comparison</title>
   <style>
     body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; background: #fafafa; color: #1a1a1a; }
     h1 { font-size: 1.4rem; }
@@ -26,7 +26,7 @@
   </style>
 </head>
 <body>
-  <h1>Jev vs LLM: who spots the killer faster and more accurately?</h1>
+  <h1>Jev vs SLM vs LLM: who spots the killer faster and more accurately?</h1>
   <button id="play">Run next round</button>
   <span id="status"></span>
 
@@ -35,6 +35,11 @@
       <h2>Jev</h2>
       <div class="big" id="jev-accuracy">-</div>
       <div class="sub" id="jev-latency">-</div>
+    </div>
+    <div class="card">
+      <h2>SLM Judge</h2>
+      <div class="big" id="slm-accuracy">-</div>
+      <div class="sub" id="slm-latency">-</div>
     </div>
     <div class="card">
       <h2>LLM Judge</h2>
@@ -57,6 +62,7 @@
       <tr>
         <th>#</th><th>Killer</th>
         <th>Jev pick</th><th>Jev conf.</th><th>Jev ms</th>
+        <th>SLM pick</th><th>SLM conf.</th><th>SLM ms</th>
         <th>LLM pick</th><th>LLM conf.</th><th>LLM ms</th>
       </tr>
     </thead>
@@ -86,6 +92,8 @@
     function renderSummary(summary) {
       document.getElementById("jev-accuracy").textContent = fmtPct(summary.jev.accuracy);
       document.getElementById("jev-latency").textContent = `${summary.jev.rounds} rounds, avg ${fmtMs(summary.jev.avg_latency_ms)}`;
+      document.getElementById("slm-accuracy").textContent = fmtPct(summary.slm.accuracy);
+      document.getElementById("slm-latency").textContent = `${summary.slm.rounds} rounds, avg ${fmtMs(summary.slm.avg_latency_ms)}`;
       document.getElementById("llm-accuracy").textContent = fmtPct(summary.llm.accuracy);
       document.getElementById("llm-latency").textContent = `${summary.llm.rounds} rounds, avg ${fmtMs(summary.llm.avg_latency_ms)}`;
     }
@@ -93,6 +101,7 @@
     function renderRow(data) {
       const tr = document.createElement("tr");
       const jevClass = data.jev_correct ? "correct" : "wrong";
+      const slmClass = data.slm_correct ? "correct" : "wrong";
       const llmClass = data.llm_correct ? "correct" : "wrong";
       tr.innerHTML = `
         <td>${data.scenario_id}</td>
@@ -100,6 +109,9 @@
         <td class="${jevClass}">${data.jev.choice}</td>
         <td>${fmtPct(data.jev.confidence)}</td>
         <td>${fmtMs(data.jev.latency_ms)}</td>
+        <td class="${slmClass}">${data.slm.choice}</td>
+        <td>${fmtPct(data.slm.confidence)}</td>
+        <td>${fmtMs(data.slm.latency_ms)}</td>
         <td class="${llmClass}">${data.llm.choice}</td>
         <td>${fmtPct(data.llm.confidence)}</td>
         <td>${fmtMs(data.llm.latency_ms)}</td>

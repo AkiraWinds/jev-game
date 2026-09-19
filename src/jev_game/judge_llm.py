@@ -1,6 +1,7 @@
-"""Judge B: a plain chat LLM, prompted to answer the same question as Jev.
+"""Judges B and C: plain chat models, prompted to answer the same question
+as Jev - one a small model (SLM), one a large model (LLM).
 
-Note: this model's "confidence" is self-reported by the model, not a
+Note: these models' "confidence" is self-reported by the model, not a
 calibrated probability the way Jev's is. That gap is part of what this
 project is trying to surface, not a bug to paper over.
 """
@@ -11,7 +12,7 @@ from dataclasses import dataclass
 
 from openai import AsyncOpenAI
 
-from jev_game.config import JUDGE_LLM_MODEL, OPENAI_API_KEY
+from jev_game.config import JUDGE_LLM_MODEL, JUDGE_SLM_MODEL, OPENAI_API_KEY
 
 # A fresh client per call would pay a new TCP/TLS handshake every round,
 # which dwarfs any real difference in model latency. Reuse one client (with
@@ -55,12 +56,12 @@ class LlmJudgment:
     latency_ms: float
 
 
-async def judge_with_llm(public_state: dict) -> LlmJudgment:
+async def _judge_with_model(public_state: dict, model: str) -> LlmJudgment:
     client = _get_client()
     user_prompt = json.dumps(public_state)
     start = time.perf_counter()
     response = await client.chat.completions.create(
-        model=JUDGE_LLM_MODEL,
+        model=model,
         messages=[
             {"role": "system", "content": _SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt},
@@ -74,3 +75,11 @@ async def judge_with_llm(public_state: dict) -> LlmJudgment:
         confidence=float(payload["confidence"]),
         latency_ms=latency_ms,
     )
+
+
+async def judge_with_slm(public_state: dict) -> LlmJudgment:
+    return await _judge_with_model(public_state, JUDGE_SLM_MODEL)
+
+
+async def judge_with_llm(public_state: dict) -> LlmJudgment:
+    return await _judge_with_model(public_state, JUDGE_LLM_MODEL)
