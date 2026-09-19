@@ -5,8 +5,9 @@ A minimal Python starter project.
 ## Jev vs. SLM vs. LLM judge comparison
 
 The runnable comparison app (case generator, judges, FastAPI server) lives
-on [`feature/jev-mafia-judge-comparison`](https://github.com/AkiraWinds/jev-game/tree/feature/jev-mafia-judge-comparison),
-not on `master`. It pits TypeSafe's Jev model (`Choice` primitive) against
+right here on `master`, merged in from
+[`feature/jev-mafia-judge-comparison`](https://github.com/AkiraWinds/jev-game/tree/feature/jev-mafia-judge-comparison),
+the branch where it was originally built. It pits TypeSafe's Jev model (`Choice` primitive) against
 plain OpenAI chat models on the task of picking the killer in a generated
 murder-mystery case from character statements and one piece of key
 evidence. The comparison started as Jev vs. one large chat model (LLM),
@@ -50,18 +51,27 @@ simulated).
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .
+pip install -e ".[dev]"
+cp .env.example .env  # fill in TYPESAFE_API_KEY, OPENAI_API_KEY
 ```
 
-## Run
+## Generate scenarios (offline, once)
 
 ```bash
-python -m jev_game.main
+python -m jev_game.generate_scenarios --rounds 5
 ```
+
+## Run the comparison
+
+```bash
+uvicorn jev_game.server:app --reload
+```
+
+Open http://127.0.0.1:8000 and click "Run next round" to step through the
+pre-generated scenarios.
 
 ## Test
 
 ```bash
-pip install pytest
 pytest
 ```
