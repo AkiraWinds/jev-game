@@ -1,9 +1,10 @@
 # jev-game
 
 A minimal Python starter project, now home to a small experiment comparing
-TypeSafe's Jev model against a plain chat LLM as a judge.
+TypeSafe's Jev model against two plain chat models - a small one (SLM) and
+a large one (LLM) - as judges.
 
-## Jev vs LLM: Mafia judge comparison
+## Jev vs SLM vs LLM: Mafia judge comparison
 
 Each round is a full whodunit case, designed offline before the server ever
 runs:
@@ -23,19 +24,22 @@ runs:
    that contradicts the key evidence.
 3. Both steps are cached to `scenarios.json`.
 
-At play time, two independent judges each see the case background, victim,
-key evidence, character bios, and statements (never the ground-truth killer
-or true timeline) and try to pick the killer:
+At play time, three independent judges each see the case background,
+victim, key evidence, character bios, and statements (never the
+ground-truth killer or true timeline) and try to pick the killer:
 
 - **Jev** (`Choice` primitive) — a calibrated probability per suspect
-- **A second, different OpenAI model** (`JUDGE_LLM_MODEL`) — prompted for
-  the same pick + a self-reported confidence
+- **A small OpenAI chat model** (`JUDGE_SLM_MODEL`) — prompted for the same
+  pick + a self-reported confidence
+- **A large OpenAI chat model** (`JUDGE_LLM_MODEL`) — same prompt, bigger
+  model
 
-`GENERATOR_MODEL` and `JUDGE_LLM_MODEL` are deliberately different models so
-Judge B is never evaluating text written by its own weights/style.
+`GENERATOR_MODEL`, `JUDGE_SLM_MODEL`, and `JUDGE_LLM_MODEL` are deliberately
+three different models so no judge is ever evaluating text written by its
+own weights/style.
 
-Both are timed independently per round; a web page shows a running
-accuracy and average-latency comparison.
+All three are timed independently per round; a web page shows a running
+accuracy and average-latency comparison across all three.
 
 ### Setup
 
@@ -67,10 +71,10 @@ Two live runs against real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1` (later
 `gpt-5.6-terra`), `JUDGE_LLM_MODEL=gpt-4.1-mini`), 10 rounds each, played
 through the actual server + judges (not simulated):
 
-| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|
-| v0 — killer's statement just "subtly evasive" (no explicit checkable clue) | 40–50% | 815 ms* | 40–50% | 841 ms* |
-| **v1 — killer's statement contains one fact that contradicts an explicit `key_evidence`** | **100%** | **388 ms** | **100%** | **701 ms** |
+| Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
+|---|---|---|---|---|---|---|
+| v0 — killer's statement just "subtly evasive" (no explicit checkable clue) | 40–50% | 815 ms* | — | — | 40–50% | 841 ms* |
+| **v1 — killer's statement contains one fact that contradicts an explicit `key_evidence`** | **100%** | **388 ms** | — | — | **100%** | **701 ms** |
 
 \* v0's latency numbers also predate a fix: both judge clients were being
 re-created per round (fresh TCP/TLS handshake each time), which added fixed
@@ -107,10 +111,10 @@ One live run against real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1`,
 `JUDGE_LLM_MODEL=gpt-4.1-mini`), 10 rounds, played through the actual judges
 (not simulated), scenarios saved to `scenarios_two_step.json`:
 
-| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|
-| v1 — one-step: key_evidence directly contradicts the killer's claim | 100% | 388 ms | 100% | 701 ms |
-| **v4 — two-step: key_evidence + a background connecting fact must be combined** | **100%** (10/10) | **380 ms** | **90%** (9/10) | **618 ms** |
+| Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
+|---|---|---|---|---|---|---|
+| v1 — one-step: key_evidence directly contradicts the killer's claim | 100% | 388 ms | — | — | 100% | 701 ms |
+| **v4 — two-step: key_evidence + a background connecting fact must be combined** | **100%** (10/10) | **380 ms** | PENDING | PENDING | **90%** (9/10) | **618 ms** |
 
 Example case (round 3, "The Last Reunion"): `background` states the archive
 room "has exactly one entrance: a single automatically latching door from the
@@ -135,7 +139,6 @@ is the only way out). Jev caught this; the LLM judge picked the wrong suspect
   actually producing two-step clues as designed, not accidentally leaking a
   one-step tell - `key_evidence` alone never names a character or states an
   impossibility.
-
 ## Test
 
 ```bash
