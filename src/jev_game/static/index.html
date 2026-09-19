@@ -17,6 +17,11 @@
     .correct { color: #1a7f37; font-weight: 600; }
     .wrong { color: #cf222e; font-weight: 600; }
     #statements { font-size: 0.85rem; color: #444; margin-top: 0.5rem; white-space: pre-wrap; }
+    #case { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background: #fff; margin-top: 1rem; }
+    #case h3 { margin: 0 0 0.3rem; }
+    #case .background { color: #444; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    #case .bios { font-size: 0.85rem; color: #444; }
+    #case .bios div { margin-bottom: 0.3rem; }
   </style>
 </head>
 <body>
@@ -37,6 +42,12 @@
     </div>
   </div>
 
+  <div id="case" hidden>
+    <h3 id="case-title"></h3>
+    <div class="background" id="case-background"></div>
+    <div class="bios" id="case-bios"></div>
+  </div>
+
   <div id="statements"></div>
 
   <table>
@@ -55,6 +66,16 @@
     const statusEl = document.getElementById("status");
     const rowsEl = document.getElementById("rows");
     const statementsEl = document.getElementById("statements");
+    const caseEl = document.getElementById("case");
+    const caseTitleEl = document.getElementById("case-title");
+    const caseBackgroundEl = document.getElementById("case-background");
+    const caseBiosEl = document.getElementById("case-bios");
+
+    function escapeHtml(s) {
+      const div = document.createElement("div");
+      div.textContent = s;
+      return div.innerHTML;
+    }
 
     function fmtPct(x) { return x === null || x === undefined ? "-" : (x * 100).toFixed(0) + "%"; }
     function fmtMs(x) { return x === null || x === undefined ? "-" : x.toFixed(0) + " ms"; }
@@ -97,6 +118,14 @@
         const data = await res.json();
         renderRow(data);
         renderSummary(data.summary);
+
+        caseEl.hidden = false;
+        caseTitleEl.textContent = `#${data.scenario_id}: ${data.title} (victim: ${data.victim})`;
+        caseBackgroundEl.textContent = data.background;
+        caseBiosEl.innerHTML = Object.entries(data.character_info)
+          .map(([name, info]) => `<div><strong>${escapeHtml(name)}</strong> - ${escapeHtml(info.role)}; relationship to victim: ${escapeHtml(info.relationship_to_victim)}; possible motive: ${escapeHtml(info.motive)}</div>`)
+          .join("");
+
         statementsEl.textContent = Object.entries(data.statements)
           .map(([name, line]) => `${name}: ${line}`).join("\n\n");
         statusEl.textContent = `${data.remaining} scenario(s) remaining`;

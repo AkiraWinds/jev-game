@@ -16,23 +16,37 @@ class JevJudgment:
     latency_ms: float
 
 
-async def judge_with_jev(statements: dict[str, str]) -> JevJudgment:
+async def judge_with_jev(public_state: dict) -> JevJudgment:
+    character_info = public_state["characters"]
     criteria = {
-        name: f"{name} is the killer and gave the evasive/misleading statement."
-        for name in statements
+        name: (
+            f"{name} ({info['role']}, relationship to victim: "
+            f"{info['relationship_to_victim']}, possible motive: {info['motive']}) "
+            "is the killer."
+        )
+        for name, info in character_info.items()
+    }
+    state = {
+        "title": public_state["title"],
+        "background": public_state["background"],
+        "victim": public_state["victim"],
+        "characters": character_info,
+        "statements": public_state["statements"],
     }
     start = time.perf_counter()
     async with AsyncTypeSafeClient(api_key=TYPESAFE_API_KEY) as client:
         response = await client.system_one(
             model=JEV_MODEL,
-            state={"statements": statements},
+            state=state,
             questions={
                 "killer": Choice(
                     instructions=(
-                        "Each character gave a statement about their whereabouts "
-                        "during a murder. Exactly one of them is the killer and is "
-                        "being evasive or misleading. Identify who is most likely "
-                        "the killer."
+                        "This is a murder mystery. Given the background, each "
+                        "character's relationship to the victim and possible "
+                        "motive, and each character's statement about their "
+                        "whereabouts, exactly one character is the killer and is "
+                        "being evasive or misleading in their statement. Identify "
+                        "who is most likely the killer."
                     ),
                     criteria=criteria,
                 ),

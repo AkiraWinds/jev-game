@@ -49,7 +49,11 @@ async def play_round():
     scoreboard.record(result)
     return {
         "scenario_id": result.scenario_id,
+        "title": scenario.title,
+        "background": scenario.background,
+        "victim": scenario.victim,
         "characters": scenario.characters,
+        "character_info": scenario.character_info,
         "statements": scenario.statements,
         "killer": result.killer,
         "jev": asdict(result.jev),

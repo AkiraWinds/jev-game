@@ -15,8 +15,10 @@ from jev_game.config import JUDGE_LLM_MODEL, OPENAI_API_KEY
 
 _SYSTEM_PROMPT = """\
 You are a careful detective judging a murder-mystery round. You will be \
-given each character's statement about their whereabouts. Exactly one of \
-them is the killer and is being evasive or misleading.
+given the case background, the victim, each character's relationship to \
+the victim and possible motive, and each character's statement about their \
+whereabouts. Exactly one of them is the killer and is being evasive or \
+misleading in their statement.
 
 Respond with ONLY a JSON object of the form:
 {"killer": "<one of the given names, exactly as spelled>", "confidence": <number between 0 and 1>}
@@ -31,9 +33,9 @@ class LlmJudgment:
     latency_ms: float
 
 
-async def judge_with_llm(statements: dict[str, str]) -> LlmJudgment:
+async def judge_with_llm(public_state: dict) -> LlmJudgment:
     client = AsyncOpenAI(api_key=OPENAI_API_KEY)
-    user_prompt = json.dumps({"statements": statements})
+    user_prompt = json.dumps(public_state)
     start = time.perf_counter()
     response = await client.chat.completions.create(
         model=JUDGE_LLM_MODEL,

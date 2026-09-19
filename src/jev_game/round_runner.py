@@ -19,9 +19,10 @@ class RoundResult:
 
 
 async def run_round(scenario: Scenario) -> RoundResult:
+    public_state = scenario.public_state()
     jev_result, llm_result = await asyncio.gather(
-        judge_with_jev(scenario.statements),
-        judge_with_llm(scenario.statements),
+        judge_with_jev(public_state),
+        judge_with_llm(public_state),
     )
     return RoundResult(
         scenario_id=scenario.id,

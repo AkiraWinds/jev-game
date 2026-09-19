@@ -10,18 +10,36 @@ from jev_game.scenarios import Scenario
 def scenario():
     return Scenario(
         id=1,
+        title="The Locked Study",
+        background="A quiet evening at a manor ends with the host found dead in the study.",
+        victim="Mr. Grey",
         characters=["Ava", "Ben"],
+        character_info={
+            "Ava": {"role": "the butler", "relationship_to_victim": "employee", "motive": "recently fired"},
+            "Ben": {"role": "the nephew", "relationship_to_victim": "heir", "motive": "owes gambling debts"},
+        },
         killer="Ben",
+        timeline={"Ava": "polishing silver in the dining room", "Ben": "sneaking into the study"},
         statements={"Ava": "I was in the garden.", "Ben": "I was... around."},
     )
 
 
+def test_public_state_excludes_killer_and_timeline(scenario):
+    public_state = scenario.public_state()
+
+    assert "killer" not in public_state
+    assert "timeline" not in public_state
+    assert public_state["title"] == scenario.title
+    assert public_state["characters"] == scenario.character_info
+    assert public_state["statements"] == scenario.statements
+
+
 @pytest.mark.asyncio
 async def test_run_round_scores_correctness(scenario, monkeypatch):
-    async def fake_jev(statements):
+    async def fake_jev(public_state):
         return JevJudgment(choice="Ben", confidence=0.9, probabilities={"Ava": 0.1, "Ben": 0.9}, latency_ms=120.0)
 
-    async def fake_llm(statements):
+    async def fake_llm(public_state):
         return LlmJudgment(choice="Ava", confidence=0.6, latency_ms=800.0)
 
     monkeypatch.setattr("jev_game.round_runner.judge_with_jev", fake_jev)
