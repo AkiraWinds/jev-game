@@ -15,17 +15,18 @@ from openai import AsyncOpenAI
 
 from jev_game.config import GENERATOR_MODEL, OPENAI_API_KEY
 
-_SYSTEM_PROMPT = """\
+_SYSTEM_PROMPT_TEMPLATE = """\
 You are writing short in-character statements for a murder-mystery party \
 game, based on a case you will be given: its background, victim, key \
 evidence, characters, the true killer, and each character's true timeline.
 
 Rules:
 - Write 2-3 sentences per character, in first person.
-- All four statements must be equally specific, equally confident, and \
-similar in length and tone. Do NOT make the killer's statement vaguer, \
-shorter, hedging, or less detailed than the others - that would give away \
-the answer by writing style alone, which is not the point of this exercise.
+- There are __N__ characters. All __N__ statements must be equally \
+specific, equally confident, and similar in length and tone. Do NOT make \
+the killer's statement vaguer, shorter, hedging, or less detailed than the \
+others - that would give away the answer by writing style alone, which is \
+not the point of this exercise.
 - Every character except the killer gives a statement consistent with \
 both their true timeline entry AND the key evidence.
 - The killer's statement must contain exactly one concrete, checkable \
@@ -54,10 +55,11 @@ async def generate_statements(case: dict) -> dict[str, str]:
             "timeline": case["timeline"],
         }
     )
+    system_prompt = _SYSTEM_PROMPT_TEMPLATE.replace("__N__", str(len(case["characters"])))
     response = await client.chat.completions.create(
         model=GENERATOR_MODEL,
         messages=[
-            {"role": "system", "content": _SYSTEM_PROMPT},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
         response_format={"type": "json_object"},

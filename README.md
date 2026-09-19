@@ -9,16 +9,16 @@ Each round is a full whodunit case, designed offline before the server ever
 runs:
 
 1. **Case design** (`case_generator.py`) — an OpenAI model (`GENERATOR_MODEL`)
-   invents an original background, victim, 4 characters (with a role,
-   relationship to the victim, and motive each), one piece of independent
-   **key evidence**, a ground-truth killer, and each character's true
-   timeline. The killer's true timeline is written to directly conflict with
-   the key evidence — a "fair play" whodunit clue (present, checkable, but
-   not spelled out) rather than a stylistic tell. Setting seeds
-   (`settings.py`) are generic mystery tropes, not text from any specific
-   existing book/show/film.
+   invents an original background, victim, `CHARACTERS_PER_ROUND` characters
+   (currently 6; with a role, relationship to the victim, and motive each),
+   one piece of independent **key evidence**, a ground-truth killer, and each
+   character's true timeline. The killer's true timeline is written to
+   directly conflict with the key evidence — a "fair play" whodunit clue
+   (present, checkable, but not spelled out) rather than a stylistic tell.
+   Setting seeds (`settings.py`) are generic mystery tropes, not text from
+   any specific existing book/show/film.
 2. **Statement writing** (`generator.py`) — the same model then writes what
-   each character actually says: all four statements equally specific and
+   each character actually says: all statements equally specific and
    confident in tone, but the killer's contains one concrete factual claim
    that contradicts the key evidence.
 3. Both steps are cached to `scenarios.json`.
@@ -91,6 +91,39 @@ are measured after switching to one long-lived client per process.
   red herring, or a clue that needs two facts combined) create a real
   accuracy gap between a calibrated `Choice` judge and a chat LLM judge,
   without regressing to unsolvable-by-either?
+
+## Results (v3 — more characters)
+
+Same case-design logic as v1 (one `key_evidence`, the killer's statement
+contradicts it, everyone else is consistent), but `CHARACTERS_PER_ROUND`
+raised from 4 to 6 in `settings.py`. One live run against real APIs
+(`jev-latest`, `GENERATOR_MODEL=gpt-4.1`, `JUDGE_LLM_MODEL=gpt-4.1-mini`), 10
+rounds, played through `round_runner.run_round` (not simulated):
+
+| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
+|---|---|---|---|---|
+| v1 — 4 characters/round | 100% | 388 ms | 100% | 701 ms |
+| **v3 — 6 characters/round** | **100%** | **422 ms** | **100%** | **727 ms** |
+
+**Takeaways:**
+- Accuracy stayed at 100% for both judges even with 6 suspects instead of 4
+  (a 16.7% random-guess floor vs. 25% before) — the "fair play" clue design
+  from v1 is robust to more characters, so this alone still doesn't create a
+  measurable accuracy gap between Jev and the LLM judge.
+- Both judges' per-round latency went up slightly (Jev +34 ms, LLM +26 ms),
+  consistent with more `Choice` options and a longer statements/characters
+  payload in the prompt/state — not a meaningful regression, and the ~2×
+  Jev-vs-LLM latency gap from v1 held.
+- **Offline case generation itself did get noticeably more expensive**: 10
+  rounds of case+statement generation (2 OpenAI calls/round) took ~4m30s
+  wall-clock (~27s/round) with 6 characters — expected, since the generator
+  model now has to invent and hold consistent 6 motives/relationships/
+  timelines instead of 4. This cost is paid once offline into
+  `scenarios.json` and never touches judge-vs-judge timing, but it's a real
+  cost if scenario count grows.
+- Confirms the same open question from v1: making the case harder via raw
+  character count doesn't widen the Jev-vs-LLM accuracy gap; a red herring or
+  a two-fact clue is still the more promising lever to try next.
 
 ## Test
 

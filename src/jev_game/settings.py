@@ -15,4 +15,4 @@ SETTING_SEEDS = [
     "a family reunion at an old lake house",
 ]
 
-CHARACTERS_PER_ROUND = 4
+CHARACTERS_PER_ROUND = 6

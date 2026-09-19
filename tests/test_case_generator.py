@@ -23,6 +23,8 @@ def _valid_case():
             {"name": "Ben", "role": "nephew", "relationship_to_victim": "heir", "motive": "debts"},
             {"name": "Cara", "role": "guest", "relationship_to_victim": "rival", "motive": "envy"},
             {"name": "Dmitri", "role": "driver", "relationship_to_victim": "employee", "motive": "blackmail"},
+            {"name": "Elena", "role": "housekeeper", "relationship_to_victim": "employee", "motive": "resentment"},
+            {"name": "Felix", "role": "business partner", "relationship_to_victim": "partner", "motive": "buyout dispute"},
         ],
         "killer": "Ben",
         "timeline": {
@@ -30,6 +32,8 @@ def _valid_case():
             "Ben": "near the study",
             "Cara": "on the terrace",
             "Dmitri": "in the garage",
+            "Elena": "in the kitchen",
+            "Felix": "on a phone call in the study",
         },
     }
 
