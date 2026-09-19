@@ -19,9 +19,11 @@ The **v1 baseline** row below is a batch run of
 (`jev-latest`, `JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`,
 `JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`): 30 pre-generated scenarios, each
 judge called 3 independent times per scenario (90 rounds/judge total), not
-simulated. Latency is reported as p50/p95 in seconds rather than a mean in
+simulated. 
+Latency is reported as p50/p95 in seconds rather than a mean in
 milliseconds, since tail latency is what users actually feel and a single
-average hides it. **Stability** is the fraction of scenarios where a judge
+average hides it. 
+**Stability** is the fraction of scenarios where a judge
 gave the *same* answer on all 3 independent repeats — a judge that flips
 its answer on a fixed input is unreliable even if its accuracy looks fine.
 The **v2/v3/v4** rows have all been refreshed onto this same
