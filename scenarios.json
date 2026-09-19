@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Dead Air at Mirror Lake",
+    "background": "At a lakeside lodge, the founders and staff of fledgling audio-tech company Echowire gather for an all-hands retreat. CEO Niall Quist is found dead at 9:31 p.m. inside the locked generator shed, apparently killed by a blow from a metal microphone stand.",
+    "victim": "Niall Quist",
+    "key_evidence": "The dining-room security camera has an unbroken, cryptographically signed recording showing Sera Venn seated beside the fireplace from 9:16 to 9:22 p.m. The murder weapon's impact analysis places the fatal blow at approximately 9:18 p.m., making it objectively impossible for Sera to have been at the generator shed at that time if the recording is genuine.",
+    "characters": [
+      "Sera Venn",
+      "Mara Sol",
+      "Theo Brand",
+      "Juniper Hale"
+    ],
+    "character_info": {
+      "Sera Venn": {
+        "role": "Head of product engineering",
+        "relationship_to_victim": "Niall's cofounder and former partner",
+        "motive": "Niall planned to expose that she had secretly diverted company funds into an abandoned project and remove her from the company."
+      },
+      "Mara Sol": {
+        "role": "Chief financial officer",
+        "relationship_to_victim": "Niall's longtime business partner",
+        "motive": "Niall intended to blame her for irregular accounts that she had falsified to conceal mounting debts."
+      },
+      "Theo Brand": {
+        "role": "Head of sales",
+        "relationship_to_victim": "A rival executive whose promotion Niall had blocked",
+        "motive": "Niall had discovered Theo was negotiating a lucrative deal behind the company's back."
+      },
+      "Juniper Hale": {
+        "role": "Lead sound designer",
+        "relationship_to_victim": "A former prot\u00e9g\u00e9 who considered Niall her mentor",
+        "motive": "Niall had stolen credit for her breakthrough audio algorithm and threatened to destroy her career if she challenged him."
+      }
+    },
+    "killer": "Sera Venn",
+    "timeline": {
+      "Sera Venn": "At 9:18 p.m., Sera was inside the generator shed, using a concealed duplicate of the microphone stand to kill Niall before returning to the lodge through the service tunnel.",
+      "Mara Sol": "At 9:18 p.m., Mara was in the lodge office reviewing printed expense reports and making a phone call to the company's auditor.",
+      "Theo Brand": "At 9:18 p.m., Theo was on the lakeside dock, recording a voice message for a prospective investor while watching the retreat's boat moored nearby.",
+      "Juniper Hale": "At 9:18 p.m., Juniper was in the dining room kitchen assembling desserts with the lodge caretaker, who later confirmed her presence."
+    },
+    "statements": {
+      "Sera Venn": "I was checking the generator shed's equipment at 9:18 p.m. That part of the evening remains vivid to me: the hum, the chill, and the sense of wanting to get back indoors.",
+      "Mara Sol": "At 9:18 p.m., I was in the lodge office reviewing printed expense reports while speaking by phone with the company's auditor. I was absorbed in reconciling the figures, with papers spread across the desk and the office quiet around me.",
+      "Theo Brand": "At 9:18 p.m., I was on the lakeside dock recording a voice message for a prospective investor while watching the retreat's boat. I was concentrating on choosing my words carefully, with the water and the empty shoreline beyond me.",
+      "Juniper Hale": "At 9:18 p.m., I was in the dining-room kitchen assembling desserts with the lodge caretaker, who can confirm I stayed there. I was focused on arranging the finishing touches, with the kitchen conversation and sweet smell filling the room."
+    }
+  },
+  {
+    "id": 2,
+    "title": "Murder on the Midnight Current",
+    "background": "The luxury riverboat Maribel is hosting a glittering fundraiser when its philanthropic founder, Orson Vale, is found dead in the locked chart room just after the vessel passes beneath the old railway bridge. A shattered champagne flute lies beside him, and the gala continues in confusion while the captain orders the ship held at the next quay.",
+    "victim": "Orson Vale",
+    "key_evidence": "The chart-room access log records Celia Voss's personal keycard opening the room at 9:52 p.m., while the fixed ballroom camera shows Celia continuously seated at the auction table from 9:49 to 9:56 p.m.; the camera's timestamp is independently synchronized with the ship's navigation system.",
+    "characters": [
+      "Celia Voss",
+      "Dr. Bram Ellery",
+      "Nadia Quill",
+      "Felix Marr"
+    ],
+    "character_info": {
+      "Celia Voss": {
+        "role": "The fundraiser's auctioneer and event producer",
+        "relationship_to_victim": "Orson's former business partner",
+        "motive": "Orson planned to expose that Celia had diverted sponsorship money into a secret account."
+      },
+      "Dr. Bram Ellery": {
+        "role": "A river ecologist and gala speaker",
+        "relationship_to_victim": "A former research colleague whom Orson publicly discredited",
+        "motive": "Orson's sabotage cost Bram a major grant and ruined his standing in the scientific community."
+      },
+      "Nadia Quill": {
+        "role": "The ship's hospitality director",
+        "relationship_to_victim": "Orson's niece and an employee of the foundation",
+        "motive": "Orson had rewritten his will to remove Nadia from the family trust after discovering her gambling debts."
+      },
+      "Felix Marr": {
+        "role": "A private antiques dealer and donor",
+        "relationship_to_victim": "Orson's longtime rival in riverfront property deals",
+        "motive": "Orson was about to cancel a lucrative sale after learning Felix had forged an artifact's provenance."
+      }
+    },
+    "killer": "Celia Voss",
+    "timeline": {
+      "Celia Voss": "At 9:52 p.m., Celia was actually in the chart room, having used a copied keycard to enter and strike Orson with the weighted base of a brass signal lamp before returning to the ballroom.",
+      "Dr. Bram Ellery": "At 9:52 p.m., Bram was on the forward observation deck explaining river sediment to three guests and remained there until the ship cleared the railway bridge.",
+      "Nadia Quill": "At 9:52 p.m., Nadia was in the galley counting replacement champagne bottles with the catering chief, whose inventory sheet bears her signature at 9:54 p.m.",
+      "Felix Marr": "At 9:52 p.m., Felix was in the men's lavatory beside the ballroom, where a non-guest deckhand saw him washing blood from a small cut on his thumb."
+    },
+    "statements": {
+      "Celia Voss": "At 9:52 p.m., my personal keycard was still in my handbag. I remained at the auction table, concentrating on the bidding and keeping the evening's schedule moving.",
+      "Dr. Bram Ellery": "At 9:52 p.m., I was on the forward observation deck explaining river sediment to three guests. I stayed there until the Maribel cleared the old railway bridge, with the river discussion continuing throughout.",
+      "Nadia Quill": "At 9:52 p.m., I was in the galley counting replacement champagne bottles with the catering chief. I signed the inventory sheet at 9:54 p.m. and then returned to the hospitality arrangements.",
+      "Felix Marr": "At 9:52 p.m., I was in the men's lavatory beside the ballroom, washing blood from a small cut on my thumb. A deckhand saw me there, and I went back toward the gala once the wound was clean."
+    }
+  },
+  {
+    "id": 3,
+    "title": "The Bitter Morning",
+    "background": "On the morning after the grand reopening of Hearth & Crumb, owner Mara Venn is found dead in the flour room, struck with a cast-iron bread mold. The bakery's ovens are still warm, but the front doors remain locked and the staff discover the body just before opening.",
+    "victim": "Mara Venn",
+    "key_evidence": "At 6:12 a.m., the neighboring pharmacy's exterior camera records Celia Rusk continuously inside the pharmacy's locked consultation room, making her claimed presence in the bakery at that moment impossible.",
+    "characters": [
+      "Celia Rusk",
+      "Jonas Pell",
+      "Iris Venn",
+      "Theo March"
+    ],
+    "character_info": {
+      "Celia Rusk": {
+        "role": "Head baker and Mara's former business partner",
+        "relationship_to_victim": "Mara bought out Celia's share of the bakery six months earlier",
+        "motive": "Celia believed Mara had cheated her and planned to replace her after the reopening"
+      },
+      "Jonas Pell": {
+        "role": "Pastry supplier",
+        "relationship_to_victim": "Mara's principal flour and chocolate supplier",
+        "motive": "Mara was about to expose Jonas for secretly substituting cheaper ingredients"
+      },
+      "Iris Venn": {
+        "role": "Mara's niece and cashier",
+        "relationship_to_victim": "Mara was Iris's guardian and employer",
+        "motive": "Mara had recently changed her will, cutting Iris out after discovering stolen cash"
+      },
+      "Theo March": {
+        "role": "Competing bakery owner",
+        "relationship_to_victim": "Mara's longtime commercial rival",
+        "motive": "Mara had secured the lease on the town's only second storefront, blocking Theo's expansion"
+      }
+    },
+    "killer": "Celia Rusk",
+    "timeline": {
+      "Celia Rusk": "At 6:12 a.m., Celia was inside Hearth & Crumb's flour room after entering through the rear door at 6:08, and she killed Mara with the bread mold.",
+      "Jonas Pell": "At 6:12 a.m., Jonas was unloading flour sacks at the town market two streets away, where the market clerk watched him sign the delivery ledger.",
+      "Iris Venn": "At 6:12 a.m., Iris was at home speaking by telephone with the bakery's accountant about the previous day's receipts.",
+      "Theo March": "At 6:12 a.m., Theo was opening his own shop on Mill Street, observed by his apprentice and the first morning customer."
+    },
+    "statements": {
+      "Celia Rusk": "At 6:12 a.m., I was in the flour room finishing the morning preparation. The reopening had left me determined to prove that my work still belonged at Hearth & Crumb.",
+      "Jonas Pell": "At 6:12 a.m., I was unloading flour sacks at the town market, with the market clerk watching me sign the delivery ledger. Mara\u2019s accusations had made the bakery\u2019s supply business tense, but I went there to complete the delivery as promised.",
+      "Iris Venn": "At 6:12 a.m., I was at home speaking by telephone with the bakery\u2019s accountant about the previous day\u2019s receipts. Mara\u2019s changes to her will had hurt me deeply, but I still hoped to explain the missing cash and repair our relationship.",
+      "Theo March": "At 6:12 a.m., I was opening my shop on Mill Street, observed by my apprentice and the first customer of the morning. Mara\u2019s new lease had blocked my expansion, but I intended to compete with Hearth & Crumb rather than abandon my own business."
+    }
+  },
+  {
+    "id": 4,
+    "title": "The Bitter Morning",
+    "background": "Mara Venn, owner of Hearth & Hallow Bakery, was found dead in the cooling room shortly after dawn, the morning after her lavish grand reopening. A display tray had been smashed beside her, and a smear of raspberry filling marked the floor leading toward the rear delivery door.",
+    "victim": "Mara Venn",
+    "key_evidence": "A timestamped security camera at the neighboring pharmacy shows the bakery's rear delivery door remained fully closed from 5:00 to 5:25 a.m., so it could not have been used as an entrance or exit during that period.",
+    "characters": [
+      "Liora Pell",
+      "Jonas Venn",
+      "Priya Dastur",
+      "Calder Wren"
+    ],
+    "character_info": {
+      "Liora Pell": {
+        "role": "Head pastry chef",
+        "relationship_to_victim": "Mara's longtime employee and former business partner",
+        "motive": "Mara had secretly planned to replace Liora after discovering she had been selling the bakery's recipes to a rival shop."
+      },
+      "Jonas Venn": {
+        "role": "Mara's younger brother and delivery driver",
+        "relationship_to_victim": "Sibling and co-owner of the bakery building",
+        "motive": "Mara intended to sell the building, leaving Jonas without his expected inheritance or job."
+      },
+      "Priya Dastur": {
+        "role": "Coffee roaster and neighboring tenant",
+        "relationship_to_victim": "Business neighbor whose caf\u00e9 supplied Hearth & Hallow",
+        "motive": "Mara had threatened to end their supply contract after Priya publicly criticized the reopening's expensive renovations."
+      },
+      "Calder Wren": {
+        "role": "Local food columnist",
+        "relationship_to_victim": "Former friend and invited guest at the reopening",
+        "motive": "Mara possessed evidence that Calder had fabricated several of his celebrated restaurant reviews."
+      }
+    },
+    "killer": "Liora Pell",
+    "timeline": {
+      "Liora Pell": "At 5:12 a.m., Liora entered through the rear delivery door, struck Mara in the cooling room with a dough scraper, and left the scraper beside the broken display tray.",
+      "Jonas Venn": "At 5:12 a.m., Jonas was in his van at the town fuel station, filling the tank before beginning the bakery's morning deliveries.",
+      "Priya Dastur": "At 5:12 a.m., Priya was in her caf\u00e9 across the alley, calibrating the espresso grinder while her opening employee watched.",
+      "Calder Wren": "At 5:12 a.m., Calder was in the upstairs apartment above the bakery, asleep after returning from the reopening party."
+    },
+    "statements": {
+      "Liora Pell": "At 5:12 a.m., I entered through the rear delivery door before going to the cooling room to begin the bakery's early preparations. I expected the quiet morning to follow its usual routine, with the display area ready for the day's first customers.",
+      "Jonas Venn": "At 5:12 a.m., I was at the town fuel station filling my van before starting the bakery's morning deliveries. The attendant saw me there, and I had not yet reached the bakery when the day's work was supposed to begin.",
+      "Priya Dastur": "At 5:12 a.m., I was across the alley in my caf\u00e9, calibrating the espresso grinder while my opening employee watched. I was preparing our first service and had not crossed into the bakery during that early part of the morning.",
+      "Calder Wren": "At 5:12 a.m., I was asleep in the upstairs apartment above the bakery after returning from Mara's reopening party. I had gone upstairs expecting to rest until later, and I did not begin the morning near the bakery's work areas."
+    }
+  },
+  {
+    "id": 5,
+    "title": "The Empty Applause",
+    "background": "At the opening night of the Vesper House Gallery, a shattered skylight and a missing painting suggest a break-in amid the crowded celebration. Gallery director Mara Venn is found dead at 9:21 p.m. in the locked archive office, struck with a bronze sculpture from the missing exhibit. An uninvolved volunteer discovers the body after the gallery lights return.",
+    "victim": "Mara Venn",
+    "key_evidence": "The gallery's unedited opening livestream is time-synchronized to the city clock and shows Iris Bell continuously speaking at the main podium at exactly 9:12 p.m.; the coroner places Mara's fatal blow at 9:12 p.m.",
+    "characters": [
+      "Niko Vale",
+      "Elsa Quill",
+      "Tomas Reed",
+      "Iris Bell"
+    ],
+    "character_info": {
+      "Niko Vale": {
+        "role": "Gallery operations manager",
+        "relationship_to_victim": "Mara's former prot\u00e9g\u00e9",
+        "motive": "Mara had discovered that Niko was concealing costly insurance discrepancies."
+      },
+      "Elsa Quill": {
+        "role": "Restoration conservator",
+        "relationship_to_victim": "Mara's former partner",
+        "motive": "Mara planned to publicly discredit Elsa's restoration methods and end her career."
+      },
+      "Tomas Reed": {
+        "role": "Contract security supervisor",
+        "relationship_to_victim": "Mara's security contractor",
+        "motive": "Mara was about to report Tomas for selling temporary access codes to art thieves."
+      },
+      "Iris Bell": {
+        "role": "Featured performance artist",
+        "relationship_to_victim": "Mara's newest client",
+        "motive": "Mara had learned Iris forged the signature on her celebrated series and intended to cancel the exhibition."
+      }
+    },
+    "killer": "Iris Bell",
+    "timeline": {
+      "Niko Vale": "At 9:12 p.m., Niko was in the loading dock office replacing a mislabeled inventory tag on a shipping crate.",
+      "Elsa Quill": "At 9:12 p.m., Elsa was in the sculpture room photographing a damaged pedestal for the gallery's insurance file.",
+      "Tomas Reed": "At 9:12 p.m., Tomas was in the east gallery resetting a tripped motion sensor beside the skylight display.",
+      "Iris Bell": "At 9:12 p.m., Iris was in the archive office striking Mara with the bronze sculpture and staging the broken-skylight burglary."
+    },
+    "statements": {
+      "Niko Vale": "Mara\u2019s insurance questions had put me under pressure, but I was still trying to keep the opening organized and running smoothly. At 9:12 p.m., I was in the loading dock office replacing a mislabeled inventory tag on a shipping crate.",
+      "Elsa Quill": "Mara\u2019s plans to discredit my restoration work made the evening painful, but I wanted the gallery\u2019s exhibition protected from further damage. At 9:12 p.m., I was in the sculpture room photographing a damaged pedestal for the insurance file.",
+      "Tomas Reed": "Mara\u2019s threat to report my access-code dealings endangered my contract, yet I remained responsible for keeping the crowded gallery secure. At 9:12 p.m., I was in the east gallery resetting a tripped motion sensor beside the skylight display.",
+      "Iris Bell": "I kept my attention on the exhibition and hoped the opening would proceed without another dispute with Mara. At 9:12 p.m., I was in the archive office with her."
+    }
+  }
+]
