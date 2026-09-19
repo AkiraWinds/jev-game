@@ -92,6 +92,50 @@ are measured after switching to one long-lived client per process.
   accuracy gap between a calibrated `Choice` judge and a chat LLM judge,
   without regressing to unsolvable-by-either?
 
+## Results (v4 — two-step evidence)
+
+v1's `key_evidence` directly named an impossible time/place for the killer,
+which both judges solved at 100% accuracy - too easy to show a real gap. This
+variant changes `case_generator.py`'s prompt so `key_evidence` is a standalone,
+neutral fact (a sensor log, a door counter) that never names or implicates
+anyone, and `background` separately states a load-bearing "connecting fact"
+(e.g. the crime scene has exactly one entrance). The killer's statement only
+contradicts the evidence once both facts are combined - a real two-step
+inference, not a one-line lookup.
+
+One live run against real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1`,
+`JUDGE_LLM_MODEL=gpt-4.1-mini`), 10 rounds, played through the actual judges
+(not simulated), scenarios saved to `scenarios_two_step.json`:
+
+| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
+|---|---|---|---|---|
+| v1 — one-step: key_evidence directly contradicts the killer's claim | 100% | 388 ms | 100% | 701 ms |
+| **v4 — two-step: key_evidence + a background connecting fact must be combined** | **100%** (10/10) | **380 ms** | **90%** (9/10) | **618 ms** |
+
+Example case (round 3, "The Last Reunion"): `background` states the archive
+room "has exactly one entrance: a single automatically latching door from the
+upstairs landing"; `key_evidence` says "The archive door's latch sensor
+recorded one opening at 9:12 p.m. and one closing at 9:13 p.m., with no other
+opening between 8:30 p.m. and the body's discovery" - a neutral sensor log
+that names no one. The killer, Rowan Vey, claims "At 9:05 p.m., I left the
+archive through its door" - which is only provably false once you combine the
+sensor log (door didn't open until 9:12) with the connecting fact (that door
+is the only way out). Jev caught this; the LLM judge picked the wrong suspect
+(Iris Vey) on this round.
+
+**Takeaways:**
+- The two-step design produced the first real accuracy gap between the two
+  judges on this project: Jev stayed at 100% while the plain chat LLM dropped
+  to 90% (missed 1/10), on the same case difficulty.
+- This is a single 10-round sample, so a 90% vs. 100% gap (one missed round)
+  is suggestive, not conclusive - worth re-running with more rounds or more
+  seeds before treating the gap as reliable.
+- Latency ordering held: Jev remained roughly 1.6x faster than the LLM judge.
+- Inspecting individual cases (e.g. round 3 above) confirms the generator is
+  actually producing two-step clues as designed, not accidentally leaking a
+  one-step tell - `key_evidence` alone never names a character or states an
+  impossibility.
+
 ## Test
 
 ```bash

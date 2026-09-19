@@ -27,9 +27,9 @@ or film. You will be given a one-line setting seed as inspiration only.
 Respond with ONLY a JSON object of this exact shape:
 {
   "title": "short case title",
-  "background": "2-4 sentences: the setting, the victim, and how the body was found",
+  "background": "2-4 sentences: the setting, the victim, how the body was found, AND exactly one concrete connecting fact about the crime scene or its access - e.g. it has exactly one door or entrance, only one person holds the key, a window is welded shut, the only path in passes a single guarded checkpoint, the room can only be reached by one staircase, etc. This connecting fact must be load-bearing: solving the case requires combining it with key_evidence, so state it plainly as part of the scene description, not as a hint or aside.",
   "victim": "name of the victim",
-  "key_evidence": "1-2 sentences: one specific, objective, independently-verifiable fact (security footage, a locked door, a broken clock, a witness who is not one of the characters, etc.) that pins down where someone could NOT have been, or what time something happened. This is established fact, not any character's claim.",
+  "key_evidence": "1-2 sentences: one specific, objective, independently-verifiable fact about a time, place, or object (security footage, a locked door's timestamp, a broken clock, a witness who is not one of the characters, etc.). This fact must stand completely on its own: it must NOT name or point at any character, and must NOT by itself say that anyone's claim is impossible or suspicious - read alone it should look like a neutral, unremarkable detail. It only becomes a contradiction when combined with the connecting fact stated in background.",
   "characters": [
     {"name": "...", "role": "...", "relationship_to_victim": "...", "motive": "..."}
   ],
@@ -42,12 +42,15 @@ Requirements:
 - "characters" must have exactly __N__ entries, one per name, and "timeline" \
 must have exactly one entry per character name. Exactly one character is \
 the killer.
-- The killer's true timeline entry must directly conflict with \
-"key_evidence" (e.g. the evidence places them somewhere, or rules out their \
-claimed alibi) - this conflict is the one fair, checkable clue that solves \
-the case. It must be a specific, checkable fact, not a vague feeling.
+- The killer's claimed alibi must conflict with "key_evidence" only when \
+"key_evidence" is combined with the connecting fact in "background" - \
+this two-fact combination (never key_evidence alone) is the one fair, \
+checkable clue that solves the case. Neither fact by itself may give away \
+the contradiction or mention the killer; a solver must reason through both \
+to catch it.
 - The other characters' true timeline entries must NOT conflict with \
-"key_evidence".
+"key_evidence" combined with "background", even though they may also be \
+near or interact with the same connecting fact.
 No markdown, no commentary.
 """
 
