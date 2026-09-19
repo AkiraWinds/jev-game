@@ -29,49 +29,50 @@ The **v2/v3/v4** rows have all been refreshed onto this same
 
 | Branch | Commit | Case design | Scenarios × repeats | Judge | Accuracy | Avg latency | p50 latency | p95 latency | Stability |
 |---|---|---|---|---|---|---|---|---|---|
-| [`feature/jev-mafia-judge-comparison`](https://github.com/AkiraWinds/jev-game/commit/b33aae4) | `b33aae4` | **v1 baseline** — killer's statement contains one fact that contradicts an explicit `key_evidence` | 30 × 3 (90 rounds/judge) | Jev | **100%** (90/90) | 0.342s | **0.323s** | **0.421s** | **100%** |
-| | | | | SLM | **93.3%** (84/90) | 0.686s | **0.648s** | **0.894s** | **80%** |
-| | | | | LLM | **97.8%** (88/90) | 0.872s | **0.856s** | **1.037s** | **96.7%** |
-| [`experiment/red-herring`](https://github.com/AkiraWinds/jev-game/commit/d1d44e4) | `d1d44e4` | **v2** — v1 + a non-killer character given a suspicious-looking but irrelevant detail | 30 × 3 (90 rounds/judge) | Jev | **100%** (90/90) | 0.364s | **0.346s** | **0.477s** | **100%** |
-| | | | | SLM | **90%** (81/90) | 0.702s | **0.683s** | **0.889s** | **80%** |
-| | | | | LLM | **100%** (90/90) | 0.912s | **0.878s** | **1.142s** | **100%** |
-| [`experiment/more-characters`](https://github.com/AkiraWinds/jev-game/commit/4667ff9) | `4667ff9` | **v3** — v1 with `CHARACTERS_PER_ROUND` raised from 4 to 6 | 30 × 3 (90 rounds/judge) | Jev | **100%** (90/90) | 0.352s | **0.335s** | **0.437s** | **100%** |
-| | | | | SLM | **93.3%** (84/90) | 0.711s | **0.681s** | **0.924s** | **80%** |
-| | | | | LLM | **100%** (90/90) | 0.906s | **0.892s** | **1.128s** | **100%** |
-| [`experiment/two-step-evidence`](https://github.com/AkiraWinds/jev-game/commit/ed34948) | `ed34948` | **v4** — `key_evidence` is a neutral fact that only convicts the killer once combined with a separate "connecting fact" in `background` | 30 × 3 (90 rounds/judge) | Jev | **97.8%** (88/90) | 0.345s | **0.326s** | **0.450s** | **96.7%** |
-| | | | | SLM | **96.7%** (87/90) | 0.736s | **0.710s** | **0.949s** | **93.3%** |
-| | | | | LLM | **96.7%** (87/90) | 0.882s | **0.857s** | **1.034s** | **100%** |
+| [`feature/jev-mafia-judge-comparison`](https://github.com/AkiraWinds/jev-game/commit/b33aae4) | `b33aae4` | **v1 baseline** — killer's statement contains one fact that contradicts an explicit `key_evidence` | 30 × 3 (90 rounds/judge) | Jev | **100%** (90/90) | **0.342s** | **0.323s** | **0.421s** | 100% |
+| | | | | SLM | 93.3% (84/90) | 0.686s | 0.648s | 0.894s | 80% |
+| | | | | LLM | 97.8% (88/90) | 0.872s | 0.856s | 1.037s | 96.7% |
+| [`experiment/red-herring`](https://github.com/AkiraWinds/jev-game/commit/d1d44e4) | `d1d44e4` | **v2** — v1 + a non-killer character given a suspicious-looking but irrelevant detail | 30 × 3 (90 rounds/judge) | Jev | **100%** (90/90) | **0.364s** | **0.346s** | **0.477s** | 100% |
+| | | | | SLM | 90% (81/90) | 0.702s | 0.683s | 0.889s | 80% |
+| | | | | LLM | **100%** (90/90) | 0.912s | 0.878s | 1.142s | 100% |
+| [`experiment/more-characters`](https://github.com/AkiraWinds/jev-game/commit/4667ff9) | `4667ff9` | **v3** — v1 with `CHARACTERS_PER_ROUND` raised from 4 to 6 | 30 × 3 (90 rounds/judge) | Jev | **100%** (90/90) | **0.352s** | **0.335s** | **0.437s** | 100% |
+| | | | | SLM | 93.3% (84/90) | 0.711s | 0.681s | 0.924s | 80% |
+| | | | | LLM | **100%** (90/90) | 0.906s | 0.892s | 1.128s | 100% |
+| [`experiment/two-step-evidence`](https://github.com/AkiraWinds/jev-game/commit/ed34948) | `ed34948` | **v4** — `key_evidence` is a neutral fact that only convicts the killer once combined with a separate "connecting fact" in `background` | 30 × 3 (90 rounds/judge) | Jev | **97.8%** (88/90) | **0.345s** | **0.326s** | **0.450s** | 96.7% |
+| | | | | SLM | 96.7% (87/90) | 0.736s | 0.710s | 0.949s | 93.3% |
+| | | | | LLM | 96.7% (87/90) | 0.882s | 0.857s | 1.034s | 100% |
 
-**Takeaways (v1 baseline, 30 scenarios × 3 repeats):**
-- Jev matched the large LLM judge's accuracy (100% vs. 97.8%) while being
-  roughly 2.5x faster at both p50 and p95, and was the only judge with
-  perfect repeated-run stability (100%) — it never flipped its answer on
-  a fixed input across 3 independent calls.
-- The small-model judge (SLM) was both the least accurate (93.3%) and the
-  least stable (80%): on 1 in 5 scenarios it gave a different answer across
-  its 3 repeats, which the original single-run methodology couldn't have
-  caught.
-- The large LLM judge sat between the two: 97.8% accuracy and 96.7%
+**Takeaways (all branches, 30 scenarios × 3 repeats):**
+- **v1 baseline** — Jev matched the large LLM judge's accuracy (100% vs.
+  97.8%) while being roughly 2.5x faster at both p50 and p95, and was the
+  only judge with perfect repeated-run stability (100%) — it never flipped
+  its answer on a fixed input across 3 independent calls. The small-model
+  judge (SLM) was both the least accurate (93.3%) and the least stable
+  (80%): on 1 in 5 scenarios it gave a different answer across its 3
+  repeats, which the original single-run methodology couldn't have caught.
+  The large LLM judge sat between the two: 97.8% accuracy and 96.7%
   stability, at roughly double Jev's latency.
-- The v3 row is now on the same 30-scenario/3-repeat methodology: with 6
-  characters/round instead of 4, Jev and the LLM judge both held 100%
-  accuracy and 100% stability, while the SLM judge saw the same 93.3%
-  accuracy / 80% stability weak spot as on the v1 baseline — more
-  characters didn't change which judge struggles.
-- The v4 row is also now on the same methodology, and it's the first case
-  design where Jev's accuracy (97.8%) edges out both chat-model judges
-  (96.7% each) instead of tying or trailing the LLM judge — splitting
-  `key_evidence` from the "connecting fact" in `background` forces a real
-  two-step inference, and that extra hop cost the large LLM judge more
-  than it cost Jev. The SLM judge was the least stable (93.3%), consistent
-  with its weak spot on the other case designs.
-- The v2 row is now also on the same methodology, and it's the case
-  design with the widest judge spread: Jev and the LLM judge both held
-  100% accuracy and 100% stability, but the SLM judge dropped to 90%
-  accuracy (81/90) and 80% stability — a red herring distracting a
-  non-killer character was the one variant that measurably pulled the
-  SLM judge off the real, checkable contradiction, something the
-  original single-run methodology couldn't have caught.
+- **v2 — red herring** — the case design with the widest judge spread:
+  Jev and the LLM judge both held 100% accuracy and 100% stability, but
+  the SLM judge dropped to 90% accuracy (81/90) and 80% stability — a red
+  herring distracting a non-killer character was the one variant that
+  measurably pulled the SLM judge off the real, checkable contradiction,
+  something the original single-run methodology couldn't have caught.
+- **v3 — more characters** — with 6 characters/round instead of 4, Jev
+  and the LLM judge both held 100% accuracy and 100% stability, while the
+  SLM judge saw the same 93.3% accuracy / 80% stability weak spot as on
+  the v1 baseline — more characters didn't change which judge struggles.
+- **v4 — two-step evidence** — the first case design where Jev's accuracy
+  (97.8%) edges out both chat-model judges (96.7% each) instead of tying
+  or trailing the LLM judge — splitting `key_evidence` from the
+  "connecting fact" in `background` forces a real two-step inference, and
+  that extra hop cost the large LLM judge more than it cost Jev. The SLM
+  judge was the least stable (93.3%), consistent with its weak spot on
+  the other case designs.
+- Across all four variants, Jev was the fastest judge on every latency
+  metric (avg/p50/p95) and matched or beat both chat-model judges on
+  accuracy — the case-design changes moved the SLM and LLM judges' numbers
+  around more than they moved Jev's.
 
 ## Setup
 
