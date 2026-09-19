@@ -107,14 +107,18 @@ anyone, and `background` separately states a load-bearing "connecting fact"
 contradicts the evidence once both facts are combined - a real two-step
 inference, not a one-line lookup.
 
-One live run against real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1`,
-`JUDGE_LLM_MODEL=gpt-4.1-mini`), 10 rounds, played through the actual judges
-(not simulated), scenarios saved to `scenarios_two_step.json`:
+Two live runs against real APIs, 10 rounds each, played through the actual
+judges (not simulated), scenarios saved to `scenarios_two_step.json`: a first
+run with just Jev vs. one LLM judge (`GENERATOR_MODEL=gpt-4.1`,
+`JUDGE_LLM_MODEL=gpt-4.1-mini`), then a second run through the full 3-judge
+`round_runner.run_round` (`jev-latest`, `JUDGE_SLM_MODEL=gpt-4.1-nano`,
+`JUDGE_LLM_MODEL=gpt-4.1-mini`) on the same 10 pre-generated scenarios:
 
 | Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
 |---|---|---|---|---|---|---|
 | v1 — one-step: key_evidence directly contradicts the killer's claim | 100% | 388 ms | — | — | 100% | 701 ms |
-| **v4 — two-step: key_evidence + a background connecting fact must be combined** | **100%** (10/10) | **380 ms** | PENDING | PENDING | **90%** (9/10) | **618 ms** |
+| v4 — two-step, Jev vs. LLM only | 100% (10/10) | 380 ms | — | — | 90% (9/10) | 618 ms |
+| **v4 — two-step, three-way (Jev vs. SLM vs. LLM)** | **100%** (10/10) | **363 ms** | **80%** (8/10) | **608 ms** | **90%** (9/10) | **682 ms** |
 
 Example case (round 3, "The Last Reunion"): `background` states the archive
 room "has exactly one entrance: a single automatically latching door from the
@@ -124,17 +128,24 @@ opening between 8:30 p.m. and the body's discovery" - a neutral sensor log
 that names no one. The killer, Rowan Vey, claims "At 9:05 p.m., I left the
 archive through its door" - which is only provably false once you combine the
 sensor log (door didn't open until 9:12) with the connecting fact (that door
-is the only way out). Jev caught this; the LLM judge picked the wrong suspect
-(Iris Vey) on this round.
+is the only way out). Jev and the SLM both caught this; the LLM judge picked
+the wrong suspect (Iris Vey) on this round.
 
 **Takeaways:**
-- The two-step design produced the first real accuracy gap between the two
-  judges on this project: Jev stayed at 100% while the plain chat LLM dropped
-  to 90% (missed 1/10), on the same case difficulty.
-- This is a single 10-round sample, so a 90% vs. 100% gap (one missed round)
-  is suggestive, not conclusive - worth re-running with more rounds or more
-  seeds before treating the gap as reliable.
-- Latency ordering held: Jev remained roughly 1.6x faster than the LLM judge.
+- The two-step design produced the first real accuracy gap between Jev and
+  a plain chat LLM judge on this project: Jev stayed at 100% while the LLM
+  dropped to 90% (missed 1/10), on the same case difficulty.
+- Adding the SLM as a third judge on the same two-step scenarios showed the
+  gap compounds with model size, not just clue design: the small chat model
+  fell further than the large one (80%, 2/10 missed) - one more miss than
+  the LLM on top of the miss they shared, confirming the two-step inference
+  is harder for weaker models specifically, not just harder in general.
+- This is a single 10-round sample per run, so these gaps are suggestive,
+  not conclusive - worth re-running with more rounds or more seeds before
+  treating them as reliable.
+- Latency ordering held across all three: Jev was fastest in both runs,
+  and in the three-way run the SLM was faster than the LLM but still
+  ~1.7x slower than Jev.
 - Inspecting individual cases (e.g. round 3 above) confirms the generator is
   actually producing two-step clues as designed, not accidentally leaking a
   one-step tell - `key_evidence` alone never names a character or states an
