@@ -36,7 +36,8 @@ Respond with ONLY a JSON object of this exact shape:
   "killer": "must exactly match one of the characters' name fields",
   "timeline": {
     "<character name>": "1 specific sentence with a concrete time and place: where this character actually was and what they actually did at the time of the murder - the ground truth, which may differ from what they will later claim"
-  }
+  },
+  "red_herring": "1-2 sentences naming which non-killer character has a suspicious-looking but ultimately irrelevant detail, and what that detail is"
 }
 Requirements:
 - "characters" must have exactly __N__ entries, one per name, and "timeline" \
@@ -48,6 +49,16 @@ claimed alibi) - this conflict is the one fair, checkable clue that solves \
 the case. It must be a specific, checkable fact, not a vague feeling.
 - The other characters' true timeline entries must NOT conflict with \
 "key_evidence".
+- "red_herring" must name exactly one character who is NOT the killer, and \
+describe something about them that sounds suspicious - a public argument \
+with the victim, a shameful secret, a strong motive, being seen somewhere \
+odd - but that has no actual bearing on the murder: it must NOT conflict \
+with "key_evidence", and that character's true "timeline" entry must \
+remain fully consistent with "key_evidence". It is a distraction, not a \
+second clue.
+- The red herring detail must also be visible in the case itself, not only \
+in the "red_herring" field: work it into that character's \
+"relationship_to_victim" or "motive", or into "background".
 No markdown, no commentary.
 """
 
@@ -76,4 +87,6 @@ async def generate_case(setting_seed: str) -> dict:
         raise ValueError(f"timeline keys {set(case['timeline'])} do not match characters {names}")
     if not case.get("key_evidence"):
         raise ValueError("case is missing key_evidence")
+    if not case.get("red_herring"):
+        raise ValueError("case is missing red_herring")
     return case

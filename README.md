@@ -92,6 +92,38 @@ are measured after switching to one long-lived client per process.
   accuracy gap between a calibrated `Choice` judge and a chat LLM judge,
   without regressing to unsolvable-by-either?
 
+## Results (v2 — red herring)
+
+Branch `experiment/red-herring`: same v1 pipeline, but `case_generator.py`
+now also designs a `red_herring` — a non-killer character is given a
+suspicious-looking but irrelevant detail (a public argument with the
+victim, a secret grudge, a strong motive) that has no bearing on the
+`key_evidence` contradiction, and `generator.py` makes that character raise
+or defend the detail in their own statement. One live run against real APIs
+(`jev-latest`, `GENERATOR_MODEL=gpt-4.1`, `JUDGE_LLM_MODEL=gpt-4.1-mini`),
+10 freshly generated rounds, played through `round_runner.run_round` (not
+simulated):
+
+| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
+|---|---|---|---|---|
+| v1 — killer's statement contains one fact that contradicts an explicit `key_evidence` | 100% | 388 ms | 100% | 701 ms |
+| **v2 — v1 + a red herring distracting a non-killer character** | **100%** | **385 ms** | **100%** | **712 ms** |
+
+**Takeaways:**
+- Adding a red herring did not create an accuracy gap: both Jev and the LLM
+  judge still correctly cross-checked every statement against
+  `key_evidence` and ignored the suspicious-but-irrelevant character in all
+  10 rounds. A single distractor detail, isolated to one character's
+  motive/background and echoed in their statement, was not enough to pull
+  either judge off the one real, checkable contradiction.
+- Latency stayed essentially unchanged (Jev ~385 ms, LLM ~712 ms) — the
+  ~2× Jev speed advantage from v1 holds regardless of case complexity added
+  so far.
+- Still an open question: whether a harder distractor (e.g. a red herring
+  that itself weakly conflicts with a *secondary* piece of evidence, or
+  multiple red herrings, or requiring two facts to be combined to solve the
+  case) would be needed to separate the two judges on accuracy.
+
 ## Test
 
 ```bash

@@ -18,7 +18,9 @@ from jev_game.config import GENERATOR_MODEL, OPENAI_API_KEY
 _SYSTEM_PROMPT = """\
 You are writing short in-character statements for a murder-mystery party \
 game, based on a case you will be given: its background, victim, key \
-evidence, characters, the true killer, and each character's true timeline.
+evidence, characters, the true killer, each character's true timeline, and \
+a red herring describing which non-killer character has a suspicious-\
+looking but irrelevant detail.
 
 Rules:
 - Write 2-3 sentences per character, in first person.
@@ -35,6 +37,13 @@ solves the case - it must be a checkable fact, not a vague or evasive tone.
 - The killer must NOT confess and must NOT state anything that sounds \
 inherently suspicious - only a careful reader cross-checking the key \
 evidence should be able to catch the contradiction.
+- The character named in the red herring (who is NOT the killer) must \
+themselves bring up or defensively address their suspicious-looking \
+detail in their own statement (the argument, the secret, the motive, \
+whatever it is) - making them read as a plausible suspect - while their \
+statement still stays fully consistent with the key evidence and their \
+true timeline. Do not resolve or excuse the red herring; just let it sit \
+there as a red flag.
 - Do not mention who the killer is anywhere in the text of the statements.
 - Respond with ONLY a JSON object mapping each character's name to their \
 statement string. No markdown, no commentary.
@@ -52,6 +61,7 @@ async def generate_statements(case: dict) -> dict[str, str]:
             "characters": case["characters"],
             "killer": case["killer"],
             "timeline": case["timeline"],
+            "red_herring": case["red_herring"],
         }
     )
     response = await client.chat.completions.create(

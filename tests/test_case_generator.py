@@ -31,6 +31,7 @@ def _valid_case():
             "Cara": "on the terrace",
             "Dmitri": "in the garage",
         },
+        "red_herring": "Cara had a public shouting match with Mr. Grey earlier that evening over an old rivalry, but it has nothing to do with the study door.",
     }
 
 
