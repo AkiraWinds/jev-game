@@ -1,10 +1,10 @@
-"""Runs one pre-generated scenario through both judges and scores them."""
+"""Runs one pre-generated scenario through all three judges and scores them."""
 
 import asyncio
 from dataclasses import dataclass, field
 
 from jev_game.judge_jev import JevJudgment, judge_with_jev
-from jev_game.judge_llm import LlmJudgment, judge_with_llm
+from jev_game.judge_llm import LlmJudgment, judge_with_llm, judge_with_slm
 from jev_game.scenarios import Scenario
 
 
@@ -13,23 +13,28 @@ class RoundResult:
     scenario_id: int
     killer: str
     jev: JevJudgment
+    slm: LlmJudgment
     llm: LlmJudgment
     jev_correct: bool
+    slm_correct: bool
     llm_correct: bool
 
 
 async def run_round(scenario: Scenario) -> RoundResult:
     public_state = scenario.public_state()
-    jev_result, llm_result = await asyncio.gather(
+    jev_result, slm_result, llm_result = await asyncio.gather(
         judge_with_jev(public_state),
+        judge_with_slm(public_state),
         judge_with_llm(public_state),
     )
     return RoundResult(
         scenario_id=scenario.id,
         killer=scenario.killer,
         jev=jev_result,
+        slm=slm_result,
         llm=llm_result,
         jev_correct=jev_result.choice == scenario.killer,
+        slm_correct=slm_result.choice == scenario.killer,
         llm_correct=llm_result.choice == scenario.killer,
     )
 
@@ -56,5 +61,6 @@ class Scoreboard:
     def summary(self) -> dict:
         return {
             "jev": self._summary("jev_correct", "jev"),
+            "slm": self._summary("slm_correct", "slm"),
             "llm": self._summary("llm_correct", "llm"),
         }

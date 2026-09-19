@@ -1,9 +1,10 @@
 # jev-game
 
 A minimal Python starter project, now home to a small experiment comparing
-TypeSafe's Jev model against a plain chat LLM as a judge.
+TypeSafe's Jev model against two plain chat models - a small one (SLM) and
+a large one (LLM) - as judges.
 
-## Jev vs LLM: Mafia judge comparison
+## Jev vs SLM vs LLM: Mafia judge comparison
 
 Each round is a full whodunit case, designed offline before the server ever
 runs:
@@ -23,19 +24,22 @@ runs:
    that contradicts the key evidence.
 3. Both steps are cached to `scenarios.json`.
 
-At play time, two independent judges each see the case background, victim,
-key evidence, character bios, and statements (never the ground-truth killer
-or true timeline) and try to pick the killer:
+At play time, three independent judges each see the case background,
+victim, key evidence, character bios, and statements (never the
+ground-truth killer or true timeline) and try to pick the killer:
 
 - **Jev** (`Choice` primitive) — a calibrated probability per suspect
-- **A second, different OpenAI model** (`JUDGE_LLM_MODEL`) — prompted for
-  the same pick + a self-reported confidence
+- **A small OpenAI chat model** (`JUDGE_SLM_MODEL`) — prompted for the same
+  pick + a self-reported confidence
+- **A large OpenAI chat model** (`JUDGE_LLM_MODEL`) — same prompt, bigger
+  model
 
-`GENERATOR_MODEL` and `JUDGE_LLM_MODEL` are deliberately different models so
-Judge B is never evaluating text written by its own weights/style.
+`GENERATOR_MODEL`, `JUDGE_SLM_MODEL`, and `JUDGE_LLM_MODEL` are deliberately
+three different models so no judge is ever evaluating text written by its
+own weights/style.
 
-Both are timed independently per round; a web page shows a running
-accuracy and average-latency comparison.
+All three are timed independently per round; a web page shows a running
+accuracy and average-latency comparison across all three.
 
 ### Setup
 
@@ -91,6 +95,37 @@ are measured after switching to one long-lived client per process.
   red herring, or a clue that needs two facts combined) create a real
   accuracy gap between a calibrated `Choice` judge and a chat LLM judge,
   without regressing to unsolvable-by-either?
+
+## Results (v5 — three-way judge: Jev vs SLM vs LLM)
+
+Same v1 case design (`scenarios.json`, one `key_evidence` fact the killer's
+statement contradicts) and the same 10 pre-generated rounds used for v1, but
+`judge_llm.py` now serves two separate judges off one shared client instead
+of one, and a third judge was added to `round_runner.py`/`Scoreboard`. One
+live run against real APIs (`jev-latest`, `JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`,
+`JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`), played through `round_runner.run_round`
+(not simulated):
+
+| Judge | Accuracy | Avg latency |
+|---|---|---|
+| **Jev** (`Choice` primitive) | **100%** (10/10) | **449 ms** |
+| SLM (`gpt-5.4-nano-2026-03-17`) | 90% (9/10) | 872 ms |
+| LLM (`gpt-5.4-2026-03-05`) | 100% (10/10) | 1060 ms |
+
+**Takeaways:**
+- This is the first run where three-way comparison itself (not a harder
+  case design) separated the judges: the small chat model missed one round
+  that both Jev and the large chat model got right, on identical input.
+- Jev was faster than *both* chat models here - not just the small one -
+  roughly 2× faster than the SLM and 2.4× faster than the LLM, while
+  matching the LLM's accuracy exactly.
+- The SLM's miss is a single round out of 10 - suggestive of a real
+  capability gap between the small and large chat model on this task, but
+  not conclusive on this sample size; worth re-running with more rounds.
+- This result is orthogonal to the v2/v3/v4 case-design experiments on the
+  other branches (which only ever compared Jev vs. one LLM judge) - adding
+  a small model as a third judge is a separate lever from making the case
+  itself harder, and the two can be combined in a future variant.
 
 ## Test
 
