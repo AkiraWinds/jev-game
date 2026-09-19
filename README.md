@@ -112,7 +112,6 @@ simulated):
 |---|---|---|---|---|---|---|
 | v1 — killer's statement contains one fact that contradicts an explicit `key_evidence` | 100% | 388 ms | — | — | 100% | 701 ms |
 | v2 — v1 + a red herring distracting a non-killer character | 100% | 385 ms | — | — | 100% | 712 ms |
-| v2 — same case design, 3-judge (`JUDGE_SLM_MODEL=gpt-4.1-nano`) | 100% | 381 ms | 60% | 659 ms | 90% | 725 ms |
 | **v2 — same case design, 3-judge (`JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`, `JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`)** | **100%** | **403 ms** | **100%** | **700 ms** | **100%** | **857 ms** |
 
 **Takeaways:**
@@ -122,21 +121,13 @@ simulated):
   10 rounds. A single distractor detail, isolated to one character's
   motive/background and echoed in their statement, was not enough to pull
   either judge off the one real, checkable contradiction.
-- Bringing in a third, smaller judge (SLM) is what first separated the
-  models on this case design, but only with an older/weaker SLM
-  (`gpt-4.1-nano`): it dropped to 60% (missed 4/10, including the round
-  where the `gpt-4.1-mini` LLM judge itself also missed), while Jev stayed
-  perfect and LLM slipped to 90%.
-- Re-running the same 10 rounds with newer models (`gpt-5.4-nano` for SLM,
-  `gpt-5.4` for LLM) closed that accuracy gap entirely — all three judges
-  hit 100%. The gap wasn't inherent to the case design or to having three
-  judges; it was specific to how weak the `gpt-4.1-nano` SLM was. Model
-  generation matters more than judge count for accuracy on this task.
+- Bringing in a third, smaller judge (SLM, `gpt-5.4-nano-2026-03-17`)
+  didn't separate the judges on this case design either — Jev, SLM, and LLM
+  all hit 100% on the same 10 rounds.
 - The latency ordering held across every run regardless of accuracy: Jev
-  fastest (~381–403 ms), then SLM, then LLM slowest (~700–860 ms with the
-  gpt-5.4 pair) — Jev's ~2× speed advantage over chat-model judges is
-  robust to both case complexity and model generation, even once accuracy
-  differences disappear.
+  fastest (~385–403 ms), then SLM, then LLM slowest (~700–860 ms) — Jev's
+  ~2× speed advantage over chat-model judges is robust to both case
+  complexity and judge count.
 - Still an open question: whether a harder distractor (e.g. a red herring
   that itself weakly conflicts with a *secondary* piece of evidence, or
   multiple red herrings, or requiring two facts to be combined to solve the
