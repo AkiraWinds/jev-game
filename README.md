@@ -72,30 +72,41 @@ now also designs a `red_herring` — a non-killer character is given a
 suspicious-looking but irrelevant detail (a public argument with the
 victim, a secret grudge, a strong motive) that has no bearing on the
 `key_evidence` contradiction, and `generator.py` makes that character raise
-or defend the detail in their own statement. One live 3-judge run against
-real APIs (`jev-latest`, `GENERATOR_MODEL=gpt-4.1`,
-`JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`, `JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`),
-10 freshly generated rounds, played through `round_runner.run_round` (not
-simulated):
+or defend the detail in their own statement. A batch run of
+`python -m jev_game.run_benchmark --repeats 3` against real APIs
+(`jev-latest`, `GENERATOR_MODEL=gpt-4.1`,
+`JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`, `JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`):
+30 scenarios (10 original + 20 freshly generated through the same
+red-herring case-design path), each judge called 3 independent times per
+scenario (90 rounds/judge total), not simulated. Latency is reported as
+p50/p95 in seconds rather than a mean in milliseconds, since tail latency is
+what users actually feel and a single average hides it. **Stability** is
+the fraction of scenarios where a judge gave the *same* answer on all 3
+independent repeats — a judge that flips its answer on a fixed input is
+unreliable even if its accuracy looks fine.
 
-| Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|---|---|
-| **v2 — v1 + a red herring distracting a non-killer character** | **100%** | **403 ms** | **100%** | **700 ms** | **100%** | **857 ms** |
+| Scenarios × repeats | Jev | SLM | LLM |
+|---|---|---|---|
+| 30 × 3 (90 rounds/judge) | acc 100% (90/90) / p50 0.346s / p95 0.477s / stability 100% | acc 90% (81/90) / p50 0.683s / p95 0.889s / stability 80% | acc 100% (90/90) / p50 0.878s / p95 1.142s / stability 100% |
 
 **Takeaways:**
-- Adding a red herring did not create an accuracy gap between any of the
-  three judges: Jev, the SLM, and the LLM all correctly cross-checked every
-  statement against `key_evidence` and ignored the suspicious-but-irrelevant
-  character in all 10 rounds. A single distractor detail, isolated to one
-  character's motive/background and echoed in their statement, was not
-  enough to pull any judge off the one real, checkable contradiction.
-- The latency ordering held regardless of accuracy: Jev fastest (403 ms),
-  then SLM (700 ms), then LLM slowest (857 ms) — Jev's ~2× speed advantage
-  over the LLM judge held up on this harder case design.
+- Adding a red herring did not create an accuracy gap for Jev or the LLM
+  judge: both correctly cross-checked every statement against
+  `key_evidence` and ignored the suspicious-but-irrelevant character across
+  all 90 rounds (100% accuracy, 100% stability).
+- The SLM judge was the one to slip: 90% accuracy (81/90) and only 80%
+  stability — on a meaningful share of scenarios it either picked the
+  distractor character outright or flipped its answer across repeats on
+  the same fixed input, something the original single-run methodology
+  couldn't have caught.
+- The latency ordering held regardless of accuracy: Jev fastest (p50
+  0.346s), then SLM (p50 0.683s), then LLM slowest (p50 0.878s) — Jev's
+  ~2.5x speed advantage over the LLM judge held up on this harder case
+  design, while also being the more reliable judge than the SLM.
 - Still an open question: whether a harder distractor (e.g. a red herring
   that itself weakly conflicts with a *secondary* piece of evidence, or
   multiple red herrings, or requiring two facts to be combined to solve the
-  case) would widen the gap further, especially for the SLM judge.
+  case) would widen the SLM's accuracy/stability gap further.
 
 ## Test
 
