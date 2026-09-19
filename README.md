@@ -1,9 +1,10 @@
 # jev-game
 
 A minimal Python starter project, now home to a small experiment comparing
-TypeSafe's Jev model against a plain chat LLM as a judge.
+TypeSafe's Jev model against two plain chat models - a small one (SLM) and
+a large one (LLM) - as judges.
 
-## Jev vs LLM: Mafia judge comparison
+## Jev vs SLM vs LLM: Mafia judge comparison
 
 Each round is a full whodunit case, designed offline before the server ever
 runs:
@@ -23,19 +24,22 @@ runs:
    that contradicts the key evidence.
 3. Both steps are cached to `scenarios.json`.
 
-At play time, two independent judges each see the case background, victim,
-key evidence, character bios, and statements (never the ground-truth killer
-or true timeline) and try to pick the killer:
+At play time, three independent judges each see the case background,
+victim, key evidence, character bios, and statements (never the
+ground-truth killer or true timeline) and try to pick the killer:
 
 - **Jev** (`Choice` primitive) — a calibrated probability per suspect
-- **A second, different OpenAI model** (`JUDGE_LLM_MODEL`) — prompted for
-  the same pick + a self-reported confidence
+- **A small OpenAI chat model** (`JUDGE_SLM_MODEL`) — prompted for the same
+  pick + a self-reported confidence
+- **A large OpenAI chat model** (`JUDGE_LLM_MODEL`) — same prompt, bigger
+  model
 
-`GENERATOR_MODEL` and `JUDGE_LLM_MODEL` are deliberately different models so
-Judge B is never evaluating text written by its own weights/style.
+`GENERATOR_MODEL`, `JUDGE_SLM_MODEL`, and `JUDGE_LLM_MODEL` are deliberately
+three different models so no judge is ever evaluating text written by its
+own weights/style.
 
-Both are timed independently per round; a web page shows a running
-accuracy and average-latency comparison.
+All three are timed independently per round; a web page shows a running
+accuracy and average-latency comparison across all three.
 
 ### Setup
 
@@ -96,24 +100,26 @@ are measured after switching to one long-lived client per process.
 
 Same case-design logic as v1 (one `key_evidence`, the killer's statement
 contradicts it, everyone else is consistent), but `CHARACTERS_PER_ROUND`
-raised from 4 to 6 in `settings.py`. One live run against real APIs
-(`jev-latest`, `GENERATOR_MODEL=gpt-4.1`, `JUDGE_LLM_MODEL=gpt-4.1-mini`), 10
-rounds, played through `round_runner.run_round` (not simulated):
+raised from 4 to 6 in `settings.py`. v1 was played before the third judge
+(SLM) existed, so its row leaves that column blank; v3 is played with all
+three judges live. Runs against real APIs, 10 rounds each, played through
+`round_runner.run_round` (not simulated):
 
-| Case design | Jev accuracy | Jev avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|
-| v1 — 4 characters/round | 100% | 388 ms | 100% | 701 ms |
-| **v3 — 6 characters/round** | **100%** | **422 ms** | **100%** | **727 ms** |
+| Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
+|---|---|---|---|---|---|---|
+| v1 — 4 characters/round | 100% | 388 ms | — | — | 100% | 701 ms |
+| **v3 — 6 characters/round** | **PENDING_JEV_ACC** | **PENDING_JEV_LAT** | **PENDING_SLM_ACC** | **PENDING_SLM_LAT** | **PENDING_LLM_ACC** | **PENDING_LLM_LAT** |
 
 **Takeaways:**
-- Accuracy stayed at 100% for both judges even with 6 suspects instead of 4
-  (a 16.7% random-guess floor vs. 25% before) — the "fair play" clue design
-  from v1 is robust to more characters, so this alone still doesn't create a
-  measurable accuracy gap between Jev and the LLM judge.
-- Both judges' per-round latency went up slightly (Jev +34 ms, LLM +26 ms),
-  consistent with more `Choice` options and a longer statements/characters
-  payload in the prompt/state — not a meaningful regression, and the ~2×
-  Jev-vs-LLM latency gap from v1 held.
+- Accuracy stayed at 100% for the original two judges even with 6 suspects
+  instead of 4 (a 16.7% random-guess floor vs. 25% before) — the "fair play"
+  clue design from v1 is robust to more characters, so raw character count
+  alone still doesn't create a measurable accuracy gap between Jev and the
+  LLM judge.
+- Both judges' per-round latency went up slightly versus v1, consistent
+  with more `Choice` options and a longer statements/characters payload in
+  the prompt/state — not a meaningful regression, and the ~2× Jev-vs-LLM
+  latency gap from v1 held.
 - **Offline case generation itself did get noticeably more expensive**: 10
   rounds of case+statement generation (2 OpenAI calls/round) took ~4m30s
   wall-clock (~27s/round) with 6 characters — expected, since the generator
@@ -121,6 +127,7 @@ rounds, played through `round_runner.run_round` (not simulated):
   timelines instead of 4. This cost is paid once offline into
   `scenarios.json` and never touches judge-vs-judge timing, but it's a real
   cost if scenario count grows.
+- PENDING_TAKEAWAY_THREEWAY
 - Confirms the same open question from v1: making the case harder via raw
   character count doesn't widen the Jev-vs-LLM accuracy gap; a red herring or
   a two-fact clue is still the more promising lever to try next.
