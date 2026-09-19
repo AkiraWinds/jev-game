@@ -3,13 +3,16 @@
 This is intentionally kept separate from judging. It is only ever invoked by
 generate_scenarios.py to pre-bake scenarios.json, so its latency never leaks
 into the Jev-vs-LLM judge comparison at run time.
+
+Uses a different OpenAI model than judge_llm.py so Judge B is never
+evaluating text produced by its own weights/style.
 """
 
 import json
 
-from anthropic import AsyncAnthropic
+from openai import AsyncOpenAI
 
-from jev_game.config import ANTHROPIC_API_KEY, GENERATOR_MODEL
+from jev_game.config import GENERATOR_MODEL, OPENAI_API_KEY
 
 _SYSTEM_PROMPT = """\
 You are writing short in-character alibi statements for a murder-mystery \
@@ -31,18 +34,19 @@ statement string. No markdown, no commentary.
 
 async def generate_statements(characters: list[dict], killer_name: str) -> dict[str, str]:
     """Call the generator LLM once and return {name: statement}."""
-    client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
     roster = "\n".join(f"- {c['name']}, {c['role']}" for c in characters)
     user_prompt = (
         f"Characters:\n{roster}\n\n"
         f"The killer is: {killer_name}\n\n"
         "Write the JSON object of statements now."
     )
-    response = await client.messages.create(
+    response = await client.chat.completions.create(
         model=GENERATOR_MODEL,
-        max_tokens=800,
-        system=_SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_prompt}],
+        messages=[
+            {"role": "system", "content": _SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt},
+        ],
+        response_format={"type": "json_object"},
     )
-    text = "".join(block.text for block in response.content if block.type == "text")
-    return json.loads(text)
+    return json.loads(response.choices[0].message.content)

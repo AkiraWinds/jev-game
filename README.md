@@ -6,12 +6,16 @@ TypeSafe's Jev model against a plain chat LLM as a judge.
 ## Jev vs LLM: Mafia judge comparison
 
 Each round: 4 characters, one is secretly the killer. Character statements
-are pre-generated once (offline) by an LLM and cached to `scenarios.json`.
-At play time, two independent judges each see the same statements and try
-to pick the killer:
+are pre-generated once (offline) by an OpenAI model (`GENERATOR_MODEL`) and
+cached to `scenarios.json`. At play time, two independent judges each see
+the same statements and try to pick the killer:
 
 - **Jev** (`Choice` primitive) — a calibrated probability per suspect
-- **A second LLM** — prompted for the same pick + a self-reported confidence
+- **A second, different OpenAI model** (`JUDGE_LLM_MODEL`) — prompted for
+  the same pick + a self-reported confidence
+
+`GENERATOR_MODEL` and `JUDGE_LLM_MODEL` are deliberately different models so
+Judge B is never evaluating text written by its own weights/style.
 
 Both are timed independently per round; a web page shows a running
 accuracy and average-latency comparison.
@@ -22,7 +26,7 @@ accuracy and average-latency comparison.
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
-cp .env.example .env  # fill in TYPESAFE_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY
+cp .env.example .env  # fill in TYPESAFE_API_KEY, OPENAI_API_KEY
 ```
 
 ### Generate scenarios (offline, once)
