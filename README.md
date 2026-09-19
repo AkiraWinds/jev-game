@@ -5,13 +5,10 @@ A minimal Python starter project.
 ## Jev vs. SLM vs. LLM judge comparison
 
 The runnable comparison app (case generator, judges, FastAPI server) lives
-right here on `master`, merged in from
-[`feature/jev-mafia-judge-comparison`](https://github.com/AkiraWinds/jev-game/tree/feature/jev-mafia-judge-comparison),
-the branch where it was originally built. It pits TypeSafe's Jev model (`Choice` primitive) against
+right here on `master`. It pits TypeSafe's Jev model (`Choice` primitive) against
 plain OpenAI chat models on the task of picking the killer in a generated
 murder-mystery case from character statements and one piece of key
-evidence. The comparison started as Jev vs. one large chat model (LLM),
-then added a second, smaller chat model (SLM) as a third judge. Three
+evidence. The comparison started as Jev vs. one LLM vs. a SLM as three judges. Three
 follow-up case-design variants were each built as their own branch off the
 v1 baseline, to keep the experiments independent and avoid confounding
 which change caused which effect. Full write-up, prompts, and setup/run/test
