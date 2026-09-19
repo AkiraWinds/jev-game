@@ -69,35 +69,39 @@ pre-generated scenarios.
 
 Same case-design logic as v1 (one `key_evidence`, the killer's statement
 contradicts it, everyone else is consistent), but `CHARACTERS_PER_ROUND`
-raised from 4 to 6 in `settings.py`. One live 3-judge run against real APIs
+raised from 4 to 6 in `settings.py`. A batch run of
+`python -m jev_game.run_benchmark --repeats 3` against real APIs
 (`jev-latest`, `JUDGE_SLM_MODEL=gpt-5.4-nano-2026-03-17`,
-`JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`), 10 rounds, played through
-`round_runner.run_round` (not simulated):
+`JUDGE_LLM_MODEL=gpt-5.4-2026-03-05`): 30 pre-generated 6-character
+scenarios, each judge called 3 independent times per scenario (90
+rounds/judge total), not simulated. Latency is reported as p50/p95 in
+seconds rather than a mean in milliseconds, since tail latency is what
+users actually feel and a single average hides it. **Stability** is the
+fraction of scenarios where a judge gave the *same* answer on all 3
+independent repeats — a judge that flips its answer on a fixed input is
+unreliable even if its accuracy looks fine.
 
-| Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
-|---|---|---|---|---|---|---|
-| **v3 — 6 characters/round** | **100%** | **389 ms** | **100%** | **718 ms** | **100%** | **858 ms** |
+| Scenarios × repeats | Jev | SLM | LLM |
+|---|---|---|---|
+| 30 × 3 (90 rounds/judge) | acc 100% (90/90) / p50 0.335s / p95 0.437s / stability 100% | acc 93.3% (84/90) / p50 0.681s / p95 0.924s / stability 80% | acc 100% (90/90) / p50 0.892s / p95 1.128s / stability 100% |
 
 **Takeaways:**
-- Accuracy stayed at 100% for all three judges even with 6 suspects instead
-  of 4 (a 16.7% random-guess floor vs. 25% before) — the "fair play" clue
-  design is robust to more characters, so raw character count alone doesn't
-  create a measurable accuracy gap between any of the three judges on
-  `gpt-5.4-nano`/`gpt-5.4`.
-- An earlier run of this same batch against `gpt-4.1-nano` as the SLM did
-  show a gap (70% accuracy, missing 3/10), so the accuracy ceiling here is
-  sensitive to which small model is used — `gpt-5.4-nano` closes the gap
-  that `gpt-4.1-nano` opened on the identical 6-character case design.
-- **Offline case generation itself did get noticeably more expensive**: 10
-  rounds of case+statement generation (2 OpenAI calls/round) took ~4m30s
-  wall-clock (~27s/round) with 6 characters — expected, since the generator
-  model now has to invent and hold consistent 6 motives/relationships/
-  timelines instead of 4. This cost is paid once offline into
-  `scenarios.json` and never touches judge-vs-judge timing, but it's a real
-  cost if scenario count grows.
+- Accuracy stayed at 100% for both Jev and the large LLM judge even with 6
+  suspects instead of 4 (a 16.7% random-guess floor vs. 25% before) — the
+  "fair play" clue design is robust to more characters for the stronger
+  judges.
+- The small-model judge (SLM) was both the least accurate (93.3%, missing
+  6/90) and the least stable (80%): on 1 in 5 scenarios it gave a different
+  answer across its 3 repeats, which the original single-run methodology
+  couldn't have caught.
+- Jev matched the large LLM judge's accuracy and stability (both 100%)
+  while being roughly 2.5x faster at both p50 and p95 — the same pattern
+  seen on the v1 baseline, now confirmed to hold with 6 characters/round
+  too.
 - Making the case harder via raw character count doesn't widen the
-  Jev-vs-chat-model accuracy gap; a red herring or a two-fact clue is a more
-  promising lever to try next.
+  Jev-vs-chat-model accuracy gap for the stronger judges; the SLM is the
+  one that struggles, and a red herring or a two-fact clue is a more
+  promising lever to try next for stressing Jev and the LLM specifically.
 
 ## Test
 
