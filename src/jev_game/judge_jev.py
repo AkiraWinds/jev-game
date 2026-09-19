@@ -49,6 +49,7 @@ async def judge_with_jev(public_state: dict) -> JevJudgment:
         "title": public_state["title"],
         "background": public_state["background"],
         "victim": public_state["victim"],
+        "key_evidence": public_state["key_evidence"],
         "characters": character_info,
         "statements": public_state["statements"],
     }
@@ -60,12 +61,14 @@ async def judge_with_jev(public_state: dict) -> JevJudgment:
         questions={
             "killer": Choice(
                 instructions=(
-                    "This is a murder mystery. Given the background, each "
-                    "character's relationship to the victim and possible "
-                    "motive, and each character's statement about their "
-                    "whereabouts, exactly one character is the killer and is "
-                    "being evasive or misleading in their statement. Identify "
-                    "who is most likely the killer."
+                    "This is a murder mystery. Given the background, the "
+                    "key evidence, each character's relationship to the "
+                    "victim and possible motive, and each character's "
+                    "statement about their whereabouts, exactly one "
+                    "character's statement contains a specific factual claim "
+                    "that contradicts the key evidence - that character is "
+                    "the killer. Cross-check each statement against the key "
+                    "evidence and identify who is most likely the killer."
                 ),
                 criteria=criteria,
             ),

@@ -66,6 +66,7 @@ async def play_round():
         "title": scenario.title,
         "background": scenario.background,
         "victim": scenario.victim,
+        "key_evidence": scenario.key_evidence,
         "characters": scenario.characters,
         "character_info": scenario.character_info,
         "statements": scenario.statements,

@@ -17,6 +17,7 @@ class Scenario:
     title: str
     background: str
     victim: str
+    key_evidence: str
     characters: list[str]
     character_info: dict[str, dict[str, str]]
     killer: str
@@ -24,11 +25,16 @@ class Scenario:
     statements: dict[str, str]
 
     def public_state(self) -> dict:
-        """State visible to judges - excludes the killer and true timeline."""
+        """State visible to judges - excludes the killer and true timeline.
+
+        key_evidence IS included: it's the one fair-play clue a detective in
+        the story would have, not part of the hidden ground truth.
+        """
         return {
             "title": self.title,
             "background": self.background,
             "victim": self.victim,
+            "key_evidence": self.key_evidence,
             "characters": self.character_info,
             "statements": self.statements,
         }

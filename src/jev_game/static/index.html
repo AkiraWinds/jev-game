@@ -20,6 +20,7 @@
     #case { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background: #fff; margin-top: 1rem; }
     #case h3 { margin: 0 0 0.3rem; }
     #case .background { color: #444; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    #case .evidence { color: #7a4a00; background: #fff6e5; border-radius: 6px; padding: 0.5rem 0.7rem; font-size: 0.85rem; margin-bottom: 0.5rem; }
     #case .bios { font-size: 0.85rem; color: #444; }
     #case .bios div { margin-bottom: 0.3rem; }
   </style>
@@ -45,6 +46,7 @@
   <div id="case" hidden>
     <h3 id="case-title"></h3>
     <div class="background" id="case-background"></div>
+    <div class="evidence" id="case-evidence"></div>
     <div class="bios" id="case-bios"></div>
   </div>
 
@@ -69,6 +71,7 @@
     const caseEl = document.getElementById("case");
     const caseTitleEl = document.getElementById("case-title");
     const caseBackgroundEl = document.getElementById("case-background");
+    const caseEvidenceEl = document.getElementById("case-evidence");
     const caseBiosEl = document.getElementById("case-bios");
 
     function escapeHtml(s) {
@@ -122,6 +125,7 @@
         caseEl.hidden = false;
         caseTitleEl.textContent = `#${data.scenario_id}: ${data.title} (victim: ${data.victim})`;
         caseBackgroundEl.textContent = data.background;
+        caseEvidenceEl.textContent = `Key evidence: ${data.key_evidence}`;
         caseBiosEl.innerHTML = Object.entries(data.character_info)
           .map(([name, info]) => `<div><strong>${escapeHtml(name)}</strong> - ${escapeHtml(info.role)}; relationship to victim: ${escapeHtml(info.relationship_to_victim)}; possible motive: ${escapeHtml(info.motive)}</div>`)
           .join("");

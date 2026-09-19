@@ -13,6 +13,7 @@ def scenario():
         title="The Locked Study",
         background="A quiet evening at a manor ends with the host found dead in the study.",
         victim="Mr. Grey",
+        key_evidence="The study's side door was bolted from the inside, so the killer must have used the main hall.",
         characters=["Ava", "Ben"],
         character_info={
             "Ava": {"role": "the butler", "relationship_to_victim": "employee", "motive": "recently fired"},

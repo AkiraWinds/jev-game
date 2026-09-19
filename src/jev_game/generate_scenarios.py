@@ -45,6 +45,7 @@ async def build_scenarios(rounds: int, seed: int | None) -> list[Scenario]:
                 title=case["title"],
                 background=case["background"],
                 victim=case["victim"],
+                key_evidence=case["key_evidence"],
                 characters=names,
                 character_info=character_info,
                 killer=case["killer"],

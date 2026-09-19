@@ -17,6 +17,7 @@ def _valid_case():
         "title": "The Locked Study",
         "background": "A quiet evening ends badly.",
         "victim": "Mr. Grey",
+        "key_evidence": "The study's side door was bolted from the inside.",
         "characters": [
             {"name": "Ava", "role": "butler", "relationship_to_victim": "employee", "motive": "fired"},
             {"name": "Ben", "role": "nephew", "relationship_to_victim": "heir", "motive": "debts"},
@@ -68,4 +69,23 @@ async def test_generate_case_rejects_killer_not_in_roster(monkeypatch):
     )
 
     with pytest.raises(ValueError, match="not among characters"):
+        await generate_case("a stormy weekend at a remote country manor")
+
+
+@pytest.mark.asyncio
+async def test_generate_case_rejects_missing_key_evidence(monkeypatch):
+    case = _valid_case()
+    case["key_evidence"] = ""
+
+    async def fake_create(*args, **kwargs):
+        return _fake_openai_response(case)
+
+    monkeypatch.setattr(
+        "jev_game.case_generator.AsyncOpenAI",
+        lambda api_key: SimpleNamespace(
+            chat=SimpleNamespace(completions=SimpleNamespace(create=fake_create))
+        ),
+    )
+
+    with pytest.raises(ValueError, match="key_evidence"):
         await generate_case("a stormy weekend at a remote country manor")

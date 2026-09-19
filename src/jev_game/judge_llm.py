@@ -35,10 +35,12 @@ async def close_client() -> None:
 
 _SYSTEM_PROMPT = """\
 You are a careful detective judging a murder-mystery round. You will be \
-given the case background, the victim, each character's relationship to \
-the victim and possible motive, and each character's statement about their \
-whereabouts. Exactly one of them is the killer and is being evasive or \
-misleading in their statement.
+given the case background, the victim, a piece of key evidence, each \
+character's relationship to the victim and possible motive, and each \
+character's statement about their whereabouts. Exactly one character's \
+statement contains a specific factual claim that contradicts the key \
+evidence - that character is the killer. Cross-check each statement \
+against the key evidence carefully before answering.
 
 Respond with ONLY a JSON object of the form:
 {"killer": "<one of the given names, exactly as spelled>", "confidence": <number between 0 and 1>}
