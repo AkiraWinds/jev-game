@@ -4,6 +4,7 @@ Run with:
     uvicorn jev_game.server:app --reload
 """
 
+from contextlib import asynccontextmanager
 from dataclasses import asdict
 from pathlib import Path
 
@@ -12,10 +13,23 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from jev_game.config import SCENARIOS_PATH
+from jev_game.judge_jev import close_client as close_jev_client
+from jev_game.judge_llm import close_client as close_llm_client
 from jev_game.round_runner import Scoreboard, run_round
 from jev_game.scenarios import load_scenarios
 
-app = FastAPI(title="Jev vs LLM Mafia Judge")
+
+@asynccontextmanager
+async def _lifespan(app: FastAPI):
+    yield
+    # Both judges reuse one client per process (see judge_jev.py /
+    # judge_llm.py) so latency isn't dominated by per-round connection
+    # setup; close them cleanly on shutdown.
+    await close_jev_client()
+    await close_llm_client()
+
+
+app = FastAPI(title="Jev vs LLM Mafia Judge", lifespan=_lifespan)
 
 _static_dir = Path(__file__).parent / "static"
 app.mount("/static", StaticFiles(directory=_static_dir), name="static")

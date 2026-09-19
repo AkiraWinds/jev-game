@@ -13,6 +13,26 @@ from openai import AsyncOpenAI
 
 from jev_game.config import JUDGE_LLM_MODEL, OPENAI_API_KEY
 
+# A fresh client per call would pay a new TCP/TLS handshake every round,
+# which dwarfs any real difference in model latency. Reuse one client (with
+# a persistent connection pool) for the life of the process instead.
+_client: AsyncOpenAI | None = None
+
+
+def _get_client() -> AsyncOpenAI:
+    global _client
+    if _client is None:
+        _client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    return _client
+
+
+async def close_client() -> None:
+    global _client
+    if _client is not None:
+        await _client.close()
+        _client = None
+
+
 _SYSTEM_PROMPT = """\
 You are a careful detective judging a murder-mystery round. You will be \
 given the case background, the victim, each character's relationship to \
@@ -34,7 +54,7 @@ class LlmJudgment:
 
 
 async def judge_with_llm(public_state: dict) -> LlmJudgment:
-    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    client = _get_client()
     user_prompt = json.dumps(public_state)
     start = time.perf_counter()
     response = await client.chat.completions.create(
