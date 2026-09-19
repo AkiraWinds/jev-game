@@ -108,7 +108,7 @@ three judges live. Runs against real APIs, 10 rounds each, played through
 | Case design | Jev accuracy | Jev avg latency | SLM accuracy | SLM avg latency | LLM accuracy | LLM avg latency |
 |---|---|---|---|---|---|---|
 | v1 — 4 characters/round | 100% | 388 ms | — | — | 100% | 701 ms |
-| **v3 — 6 characters/round** | **PENDING_JEV_ACC** | **PENDING_JEV_LAT** | **PENDING_SLM_ACC** | **PENDING_SLM_LAT** | **PENDING_LLM_ACC** | **PENDING_LLM_LAT** |
+| **v3 — 6 characters/round** | **100%** | **401 ms** | **70%** | **580 ms** | **100%** | **650 ms** |
 
 **Takeaways:**
 - Accuracy stayed at 100% for the original two judges even with 6 suspects
@@ -127,7 +127,15 @@ three judges live. Runs against real APIs, 10 rounds each, played through
   timelines instead of 4. This cost is paid once offline into
   `scenarios.json` and never touches judge-vs-judge timing, but it's a real
   cost if scenario count grows.
-- PENDING_TAKEAWAY_THREEWAY
+- **This is the first run where the small chat model's accuracy actually
+  drops below 100% on the v1 case design**: the SLM missed 3/10 rounds (70%)
+  at 6 characters/round, versus its 90% on the original 4-character,
+  three-judge run — more suspects (a bigger multiple-choice field, longer
+  statements/character bios) seems to hurt a small model's judgment more
+  than it hurts Jev or the large chat model, both of which held 100%. That's
+  the first accuracy gap this experiment has produced between judges on
+  otherwise-identical case content — it just took a smaller model to reveal
+  it, not a harder case design.
 - Confirms the same open question from v1: making the case harder via raw
   character count doesn't widen the Jev-vs-LLM accuracy gap; a red herring or
   a two-fact clue is still the more promising lever to try next.
