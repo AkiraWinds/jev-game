@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Jev vs LLM: Mafia Judge Comparison</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; background: #fafafa; color: #1a1a1a; }
+    h1 { font-size: 1.4rem; }
+    .summary { display: flex; gap: 1rem; margin: 1rem 0; }
+    .card { flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background: #fff; }
+    .card h2 { margin: 0 0 0.5rem; font-size: 1rem; }
+    .card .big { font-size: 1.8rem; font-weight: 600; }
+    .card .sub { color: #666; font-size: 0.85rem; }
+    button { font-size: 1rem; padding: 0.5rem 1rem; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+    th, td { border-bottom: 1px solid #e5e5e5; padding: 0.4rem 0.5rem; text-align: left; }
+    .correct { color: #1a7f37; font-weight: 600; }
+    .wrong { color: #cf222e; font-weight: 600; }
+    #statements { font-size: 0.85rem; color: #444; margin-top: 0.5rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Jev vs LLM: who spots the killer faster and more accurately?</h1>
+  <button id="play">Run next round</button>
+  <span id="status"></span>
+
+  <div class="summary">
+    <div class="card">
+      <h2>Jev</h2>
+      <div class="big" id="jev-accuracy">-</div>
+      <div class="sub" id="jev-latency">-</div>
+    </div>
+    <div class="card">
+      <h2>LLM Judge</h2>
+      <div class="big" id="llm-accuracy">-</div>
+      <div class="sub" id="llm-latency">-</div>
+    </div>
+  </div>
+
+  <div id="statements"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Killer</th>
+        <th>Jev pick</th><th>Jev conf.</th><th>Jev ms</th>
+        <th>LLM pick</th><th>LLM conf.</th><th>LLM ms</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <script>
+    const playBtn = document.getElementById("play");
+    const statusEl = document.getElementById("status");
+    const rowsEl = document.getElementById("rows");
+    const statementsEl = document.getElementById("statements");
+
+    function fmtPct(x) { return x === null || x === undefined ? "-" : (x * 100).toFixed(0) + "%"; }
+    function fmtMs(x) { return x === null || x === undefined ? "-" : x.toFixed(0) + " ms"; }
+
+    function renderSummary(summary) {
+      document.getElementById("jev-accuracy").textContent = fmtPct(summary.jev.accuracy);
+      document.getElementById("jev-latency").textContent = `${summary.jev.rounds} rounds, avg ${fmtMs(summary.jev.avg_latency_ms)}`;
+      document.getElementById("llm-accuracy").textContent = fmtPct(summary.llm.accuracy);
+      document.getElementById("llm-latency").textContent = `${summary.llm.rounds} rounds, avg ${fmtMs(summary.llm.avg_latency_ms)}`;
+    }
+
+    function renderRow(data) {
+      const tr = document.createElement("tr");
+      const jevClass = data.jev_correct ? "correct" : "wrong";
+      const llmClass = data.llm_correct ? "correct" : "wrong";
+      tr.innerHTML = `
+        <td>${data.scenario_id}</td>
+        <td>${data.killer}</td>
+        <td class="${jevClass}">${data.jev.choice}</td>
+        <td>${fmtPct(data.jev.confidence)}</td>
+        <td>${fmtMs(data.jev.latency_ms)}</td>
+        <td class="${llmClass}">${data.llm.choice}</td>
+        <td>${fmtPct(data.llm.confidence)}</td>
+        <td>${fmtMs(data.llm.latency_ms)}</td>
+      `;
+      rowsEl.prepend(tr);
+    }
+
+    async function playRound() {
+      playBtn.disabled = true;
+      statusEl.textContent = "running...";
+      try {
+        const res = await fetch("/api/round", { method: "POST" });
+        if (!res.ok) {
+          const err = await res.json();
+          statusEl.textContent = err.detail || "error";
+          playBtn.disabled = true;
+          return;
+        }
+        const data = await res.json();
+        renderRow(data);
+        renderSummary(data.summary);
+        statementsEl.textContent = Object.entries(data.statements)
+          .map(([name, line]) => `${name}: ${line}`).join("\n\n");
+        statusEl.textContent = `${data.remaining} scenario(s) remaining`;
+        playBtn.disabled = data.remaining <= 0;
+      } catch (e) {
+        statusEl.textContent = "request failed: " + e;
+      } finally {
+        if (!playBtn.disabled) playBtn.disabled = false;
+      }
+    }
+
+    playBtn.addEventListener("click", playRound);
+  </script>
+</body>
+</html>
