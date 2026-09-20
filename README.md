@@ -45,6 +45,8 @@ The **v2/v3/v4** rows have all been refreshed onto this same
 | | | | | SLM | 96.7% (87/90) | 0.736s | 0.710s | 0.949s | 93.3% |
 | | | | | LLM | 96.7% (87/90) | 0.882s | 0.857s | 1.034s | 100% |
 
+![Accuracy, p50 latency, and stability by version for Jev, SLM, and LLM judges](assets/benchmark_chart.png)
+
 **Takeaways (all branches, 30 scenarios × 3 repeats):**
 - **v1 baseline** — Jev matched the large LLM judge's accuracy (100% vs.
   97.8%) while being roughly 2.5x faster at both p50 and p95, and was the
